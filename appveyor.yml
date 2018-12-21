@@ -1,0 +1,55 @@
+######## master Branch ########
+-
+  branches:
+    only:      
+      - parallel            
+  version: '1.0.{build}'
+  image: Visual Studio 2017
+  skip_commits:
+    files:
+      - README.md  
+  init:
+    # Good practice, because Windows line endings are different from Linux ones
+    - cmd: git config --global core.autocrlf true
+   # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  environment:     
+    appveyor_rdp_password : Pravin1985!
+    artifactName_DocWorksQATest: 'DocWorksQATestResult-{build}'
+          
+  install:
+    # build Configuration, i.e. Debug, Release, etc.
+  configuration: Release    
+  before_build:    
+    # Display minimal restore texts   
+    - ps: nuget restore    
+  build_script:
+   
+    - ps: dotnet build .\DocworksCmsQA\DocworksCmsQA.csproj;
+   #- ps: nunit3-console.exe .\DocworksCmsQA\bin\Release\DocworksCmsQA.dll;
+   
+   #test: off
+  after_test:
+  - ps: cd .\DocworksCmsQA\bin\Release\Reports
+  - ps: ls
+  #- ps: $root = Resolve-Path .\Reports; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: 7z a reports.zip *
+  - ps: Push-AppveyorArtifact reports.zip
+  
+  after_build:
+  
+  on_failure:
+  - ps: cd .\DocworksCmsQA\bin\Release\Reports
+  - ps: ls
+  #- ps: $root = Resolve-Path .\Reports; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
+  - ps: 7z a reports.zip *
+  - ps: Push-AppveyorArtifact reports.zip
+  
+  artifacts:
+    - path: '\DocworksCmsQA\bin\%configuration%\Reports'
+      name: $(artifactName_DocWorksQATest)
+      type: Zip
+  
+    
+  clone_depth: 1
+  on_finish:
+   #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

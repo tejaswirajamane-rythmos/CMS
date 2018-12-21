@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.props')" />
+  <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
+  <Import Project="..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F0BD4748-54E7-449D-A2F6-DE1406F0C721}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DocworksCmsQA</RootNamespace>
+    <AssemblyName>DocworksCmsQA</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtentReports, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExtentReports.3.1.2\lib\ExtentReports.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.7.0-beta0001\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.7.0-beta0001\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.7.0-beta0001\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.9.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.9.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Abstractions, Version=2.0.2.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.Abstractions.2.0.2.26\lib\net45\System.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.8.0\lib\net45\WebDriver.Support.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomException\AssertException.cs" />
+    <Compile Include="CustomException\ExceptionHandler.cs" />
+    <Compile Include="CustomException\ExtentTestExtension.cs" />
+    <Compile Include="DatabaseScripts\DatabaseScripts.cs" />
+    <Compile Include="DockworksApi\CmsCommonMethods.cs" />
+    <Compile Include="DockworksApi\CreateDistributions.cs" />
+    <Compile Include="DockworksApi\CreateProjects.cs" />
+    <Compile Include="DockworksApi\WSAPIClient.cs" />
+    <Compile Include="DockworksApi\WSAPIException.cs" />
+    <Compile Include="Pages\AddProjectPage.cs" />
+    <Compile Include="Pages\AuthoringScreenEnhancements.cs" />
+    <Compile Include="Pages\CreateDistributionPage.cs" />
+    <Compile Include="Pages\CreateDraftPage.cs" />
+    <Compile Include="Pages\Doc_HistoryPage.cs" />
+    <Compile Include="Pages\LoginPage.cs" />
+    <Compile Include="Pages\NodesPage.cs" />
+    <Compile Include="Pages\TagManagementNodeLevelPage.cs" />
+    <Compile Include="Pages\TagManagementSystemLevelPage.cs" />
+    <Compile Include="Pages\TagManagmentProjectLevelPage.cs" />
+    <Compile Include="SeleniumHelpers\DriverFactory.cs" />
+    <Compile Include="SeleniumHelpers\PageControl.cs" />
+    <Compile Include="SeleniumHelpers\SeleniumHelper.cs" />
+    <Compile Include="TestRailApis\APIClient.cs" />
+    <Compile Include="TestRailApis\APIException.cs" />
+    <Compile Include="TestRailApis\TestRailMethods.cs" />
+    <Compile Include="Tests\Assets\TC_21_ValidationOfUploadImage.cs" />
+    <Compile Include="Tests\BeforeTestAfterTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\GitHub\CreateDistributionGitHub.cs" />
+    <Compile Include="Tests\GitHub\CreateProjectGitHub.cs" />
+    <Compile Include="Tests\GitHub\Doc_History\GitHub_1_ValidateDocHistoryBySearchingThroughUsernameandDraftnmaeInSearchField.cs" />
+    <Compile Include="Tests\GitHub\Doc_History\GitHub_3_ValidateDocHistoryForAcceptDraftToLive.cs" />
+    <Compile Include="Tests\GitHub\Doc_History\GitHub_4_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode.cs" />
+    <Compile Include="Tests\GitHub\Doc_History\GitHub_5_ValidateDocHistoryforCreateRenameDeleteDraft.cs" />
+    <Compile Include="Tests\GitHub\Doc_History\GitHub_6_ValidateDocHistoryWithActionItems.cs" />
+    <Compile Include="Tests\GitHub\Doc_History\GutHub_2_ValidateDocHistoryBySelectingDate.cs" />
+    <Compile Include="Tests\GitHub\Drafts\GitHub_1_ValidateNewDraftDialogBoxAndErrorMsgForInvalidDrafts.cs" />
+    <Compile Include="Tests\GitHub\Drafts\GitHub_2_ValidationOfCreateDraftsOfExistingAndBlankWithValidDraftNames .cs" />
+    <Compile Include="Tests\GitHub\Drafts\GitHub_3_ValidateScreenEnhancementsWhenUserEditsExistingDraftContent.cs" />
+    <Compile Include="Tests\GitHub\Drafts\GitHub_4_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent.cs" />
+    <Compile Include="Tests\GitHub\History\GitHub_5_ValidateHistoryTabAfterEditingGdoc.cs" />
+    <Compile Include="Tests\GitHub\History\GitHub_6_ValidateCreateDraftSnapShot.cs" />
+    <Compile Include="Tests\GitHub\History\GitHub_7_ValidateEditDraftSnapshot.cs" />
+    <Compile Include="Tests\Nodes\AddNodeWithAndWithoutDraftNameForGitHub.cs" />
+    <Compile Include="Tests\GitLab\CreateDistributionGitLab.cs" />
+    <Compile Include="Tests\GitLab\CreateProjectGitLab.cs" />
+    <Compile Include="Tests\GitLab\Doc_History\GitLab_1_ValidateDocHistoryBySearchingThroughUsernameandDraftnmaeInSearchField.cs" />
+    <Compile Include="Tests\GitLab\Doc_History\GItLab_2_ValidateDocHistoryBySelectingDate.cs" />
+    <Compile Include="Tests\GitLab\Doc_History\GitLab_3_ValidateDocHistoryForAcceptDraftToLive.cs" />
+    <Compile Include="Tests\GitLab\Doc_History\GItLab_4_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode.cs" />
+    <Compile Include="Tests\GitLab\Doc_History\GitLab_5_ValidateDocHistoryforCreateRenameDeleteDraft.cs" />
+    <Compile Include="Tests\GitLab\Doc_History\GitLab_6_ValidateDocHistoryWithActionItems.cs" />
+    <Compile Include="Tests\GitLab\Drafts\GitLab_1_ValidateNewDraftDialogBoxAndErrorMsgForInvalidDrafts.cs" />
+    <Compile Include="Tests\GitLab\Drafts\GitLab_2_ValidationOfCreateDraftsOfExistingAndBlankWithValidDraftNames .cs" />
+    <Compile Include="Tests\GitLab\Drafts\GitLab_3_ValidateScreenEnhancementsWhenUserEditsExistingDraftContent.cs" />
+    <Compile Include="Tests\GitLab\Drafts\GitLab_4_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent.cs" />
+    <Compile Include="Tests\GitLab\History\GitLab_5_ValidateHistoryTabAfterEditingGdoc.cs" />
+    <Compile Include="Tests\GitLab\History\GitLab_6_ValidateCreateDraftSnapShot.cs" />
+    <Compile Include="Tests\GitLab\History\GitLab_7_ValidateEditDraftSnapshot.cs" />
+    <Compile Include="Tests\Mercurial\CreateDistributionMercurial.cs" />
+    <Compile Include="Tests\Mercurial\CreateProjectMercurial.cs" />
+    <Compile Include="Tests\Mercurial\Doc_History\Mercurial_1_ValidateDocHistoryBySearchingThroughUsernameandDraftnmaeInSearchField.cs" />
+    <Compile Include="Tests\Mercurial\Doc_History\Mercurial_2_ValidateDocHistoryBySelectingDate.cs" />
+    <Compile Include="Tests\Mercurial\Doc_History\Mercurial_3_ValidateDocHistoryForAcceptDraftToLive.cs" />
+    <Compile Include="Tests\Mercurial\Doc_History\Mercurial_4_ValidateDocHistoryForAddTagsToNodeAndRemoveTagsFromNode.cs" />
+    <Compile Include="Tests\Mercurial\Doc_History\Mercurial_5_ValidateDocHistoryforCreateRenameDeleteDraft.cs" />
+    <Compile Include="Tests\Mercurial\Doc_History\Mercurial_6_ValidateDocHistoryWithActionItems.cs" />
+    <Compile Include="Tests\Mercurial\Drafts\Mercurial_1_ValidateNewDraftDialogBoxAndErrorMsgForInvalidDrafts.cs" />
+    <Compile Include="Tests\Mercurial\Drafts\Mercurial_2_ValidationOfCreateDraftsOfExistingAndBlankWithValidDraftNames .cs" />
+    <Compile Include="Tests\Mercurial\Drafts\Mercurial_3_ValidateScreenEnhancementsWhenUserEditsExistingDraftContent.cs" />
+    <Compile Include="Tests\Mercurial\Drafts\Mercurial_4_ValidateScreenEnhancementsWhenUserEditsBlankDraftContent.cs" />
+    <Compile Include="Tests\Mercurial\History\Mercurial_5_ValidateHistoryTabAfterEditingGdoc.cs" />
+    <Compile Include="Tests\Mercurial\History\Mercurial_6_ValidateCreateDraftSnapShot.cs" />
+    <Compile Include="Tests\Mercurial\History\Mercurial_7_ValidateEditDraftSnapshot.cs" />
+    <Compile Include="Tests\Nodes\RenameNodeForGitHub.cs" />
+    <Compile Include="Tests\TagGroupCreation\TagGroupCreationSystemscreen.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\DistributionNameLengthValidation.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\VerifySystemShouldThrowAnErrorWhileCreatingDistributionIfValuesAreNotEnteredInAnyOneMandatoryFields.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\VerifyUserAbleToClickOnCloseButtonInCreateDistributionWindow.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\VerifyUserAbleToCreateDistributionWithLeadingAndTrailingSpaceInDistributionNameTextbox.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\VerifyUserAbleToSeeListOfNewlyCreatedOrexistingDistributionsInDistributionsDropdownList.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\VerifyUserAbleToSeeTheStarMarkAgainstTheFieldforAllTheMandatoryFields.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\VerifyUserAbleToSelectAnyOneDistributionInDistributionsDropdownList.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\VerifyUserAbleToViewTheListofAvailableDistributionsForParticularProjectinAvailableDistributionsField.cs" />
+    <Compile Include="Tests\Validation\CreateDistributionValidations\VerifyUserShouldNotAbleToCreateDistributionWithSameDistributionNameForSameBranch.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\CreateProjectTitleLengthValidation.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\ValidateCreationOfProjectWithProjectNameAsNumbers.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\ValidateCreationOfProjectWithTheProjectNameGivenAsSpecialCharacters.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\ValidateNotAbleToCreateProjectWithoutGivingTypeOfContents.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\ValidateUserUnableToCreateProjectWithProjectNameAsSpace.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\VerifyCreateProjectButtonShouldBeDisabledIfTypeOfContentFieldIsNull.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\VerifyCreationOfProjectIsPossibleWithSameProjectNameWhichIsAlreadyExisting.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\VerifyNotBeingAbleToCreateProjectWithoutGivingProjectTitleField.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\VerifySubmitButtonShouldBeDisabledIfRepoURLFieldIsNull.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\VerifyUserNavigatesToMainPageIfClicksCancel button while creating new project.cs" />
+    <Compile Include="Tests\Validation\CreateProjectValidations\VerifyUserUnableToCreateProjectWithoutGivingRepoURLField.cs" />
+    <Compile Include="Utilities\CommonMethods.cs" />
+    <Compile Include="Utilities\ConfigurationHelper.cs" />
+    <Compile Include="Utilities\ExtentReporter.cs" />
+    <Compile Include="Utilities\Guard.cs" />
+    <Compile Include="Utilities\Properties.cs" />
+    <Compile Include="Utilities\Verify.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="license" />
+    <None Include="MediaFiles\CodeBlocks\MoreThan100KB.docx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="extent-config.xml" />
+    <Content Include="MediaFiles\CodeBlocks\CreateProject.txt" />
+    <Content Include="MediaFiles\CodeBlocks\GroovyUtils.txt" />
+    <Content Include="MediaFiles\CodeBlocks\JSonParse.txt" />
+    <Content Include="MediaFiles\CodeBlocks\MyFirstProject-soapui-project.xml" />
+    <Content Include="MediaFiles\CodeBlocks\unity.txt" />
+    <Content Include="MediaFiles\Images\Capture.gif" />
+    <Content Include="MediaFiles\Images\Jellyfish-min.jpg" />
+    <Content Include="MediaFiles\Images\MoreThan100KB.tif" />
+    <Content Include="MediaFiles\Images\Nature_1.png" />
+    <Content Include="MediaFiles\Images\panda.jpg" />
+    <Content Include="MediaFiles\Images\Rose.tif" />
+    <Content Include="MediaFiles\Images\Rythmos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\CreateProject\" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Selenium.Firefox.WebDriver.0.20.0\build\Selenium.Firefox.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Firefox.WebDriver.0.20.0\build\Selenium.Firefox.WebDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.1\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.PhantomJS.1.0.0.0\build\Selenium.WebDriver.PhantomJS.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.PhantomJS.1.0.0.0\build\Selenium.WebDriver.PhantomJS.targets'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.IEDriver.3.11.1\build\Selenium.WebDriver.IEDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.IEDriver.3.11.1\build\Selenium.WebDriver.IEDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.45.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.2.45.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+  </Target>
+  <Import Project="..\packages\Selenium.Firefox.WebDriver.0.20.0\build\Selenium.Firefox.WebDriver.targets" Condition="Exists('..\packages\Selenium.Firefox.WebDriver.0.20.0\build\Selenium.Firefox.WebDriver.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.PhantomJS.1.0.0.0\build\Selenium.WebDriver.PhantomJS.targets" Condition="Exists('..\packages\Selenium.WebDriver.PhantomJS.1.0.0.0\build\Selenium.WebDriver.PhantomJS.targets')" />
+  <Import Project="..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.IEDriver.3.11.1\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.IEDriver.3.11.1\build\Selenium.WebDriver.IEDriver.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.45.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.45.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
+</Project>

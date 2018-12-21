@@ -1,0 +1,13 @@
+import static com.jayway.jsonpath.JsonPath.parse
+
+def response = context.expand( '${#Project#response}' )
+log.info response
+def status = context.expand( '${#Project#status}' )
+log.info status
+
+context.response = response
+
+if (status.toString()=='1') testRunner.gotoStepByName("Delay")
+else if(status.toString()=='3'){
+    log.info "error occured"
+}

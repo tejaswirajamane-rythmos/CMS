@@ -1,0 +1,7 @@
+{
+  ProjectName:"${#Project#ProjectName}",
+  RepositoryId:"97681489",
+  RepositoryName:"${#Project#RepositoryName}",
+  TypeOfContent:"2",
+  Description: "${#Project#DescriptionName}" 
+}

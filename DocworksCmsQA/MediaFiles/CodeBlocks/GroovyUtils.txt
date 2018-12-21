@@ -1,0 +1,5 @@
+import com.eviware.soapui.model.testsuite.TestRunner.Status
+com.eviware.soapui.support.GroovyUtils
+def tc = testRunner.testCase.testSuite.project.testSuites["API"].testCases["GetResponse"]
+def runner = tc.run( null, false )
+assert runner.status != Status.FAILED : runner.reason

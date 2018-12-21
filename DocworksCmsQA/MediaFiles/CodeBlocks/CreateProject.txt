@@ -1,0 +1,6 @@
+import com.eviware.soapui.model.testsuite.TestRunner.Status
+def tc = testRunner.testCase.testSuite.project.testSuites["API"].testCases["CreateProject"]
+context.reporter.pass("Login was successful")
+def runner = tc.run( null, false )
+assert runner.status != Status.FAILED : runner.reason
+context.reporter.pass("Project created Successfully")
