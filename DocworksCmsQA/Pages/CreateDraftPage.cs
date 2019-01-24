@@ -10,7 +10,7 @@ namespace DocWorksQA.Pages
 {
     public class CreateDraftPage : SeleniumHelpers.PageControl
     {
-        public By UNITYMANUAL_SIDEBAR = By.XPath("//span[@class='ui-tree-toggler fa fa-fw fa-caret-right']");
+        public By UNITYMANUAL_SIDEBAR = By.XPath("(//span[@class='ui-tree-toggler pi pi-fw ui-unselectable-text pi-caret-right'])[1]");
         public By NODES = By.XPath("//span[contains(text(),'UnityManual Overview')]");
         public By BACKDROP_CLICK = By.XPath("//div[@class='mat-drawer-backdrop mat-drawer-shown']");
         public By NODE = By.XPath("(//div[@class='ui-treenode-content ui-treenode-selectable'])[2]");
@@ -21,11 +21,17 @@ namespace DocWorksQA.Pages
         public By BLANKDRAFT_CLICK = By.XPath("(//div[@class='mat-radio-outer-circle'])[2]");
         public By EXISTINGDRAFTDROPDOWN = By.XPath("//mat-select[@aria-label='Existing Drafts']");
         public By CODERDRAFT_CLICK = By.XPath("//mat-option/span[contains(text(),'Source Control Draft')]");
-        public By CREATEDRAFT_BUTTON = By.XPath("(//button[@class='mat-raised-button mat-primary']/span)[contains(text(),'Create Draft')]");
+        public By CREATEDRAFT_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][text()=' Create Draft ']");
         public By DRAFTNAMEERROR = By.XPath("//mat-error[text()='Please enter at least 5 characters.']");
         public By OPENPROJECT = By.XPath("//button[contains(text(), 'Open')]");
         public By PREVIEW_TAB = By.XPath("(//div[@class='tab-title ng-star-inserted']//span[contains(text(), 'preview')])[1]");
         public By CLICK_DRAFT_BUTTON = By.XPath("(//mat-select-trigger[@class='ng-star-inserted'])[1]");
+        public By CLICK_BLANK_RADIO_BUTTON = By.XPath("(//div[@class='mat-radio-outer-circle'])[2]");
+        internal void ClickBlankRadioBtn()
+        {
+           
+        }
+
         public By LATEST_DRAFT_IN_DROPDOWN = By.XPath("(//mat-list-item//span[@class='oneline-ellipsis'])[last()]");
 
         private readonly ExtentTest test;
@@ -84,7 +90,7 @@ namespace DocWorksQA.Pages
         {
            // Click(BACKDROP_CLICK);
             Click(CLICK_DRAFT_BUTTON);
-            Click(By.XPath("(//mat-list-item//span[@class='oneline-ellipsis'])[text()='"+ draftName + "']"));
+            ClickByJavaScriptExecutor(By.XPath("//span[@class='oneline-ellipsis'][text()='" + draftName + "']"));
             Info(test, "Entered Draft Name:" + draftName + " ");
             return draftName;
         }

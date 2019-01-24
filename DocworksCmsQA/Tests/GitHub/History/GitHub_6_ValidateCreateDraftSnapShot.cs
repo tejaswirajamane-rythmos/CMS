@@ -22,10 +22,10 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = db.GetOneProjectForManual_GitHub();
+           // projectName = db.GetOneProjectForManual_GitHub();
 
-            distribution = db.GetOneDistributionFromProject(projectName);
-            // projectName = "1AprojectTest";
+           // distribution = db.GetOneDistributionFromProject(projectName);
+            projectName = "SELENIUMGITHUBKCBVJ";
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -45,7 +45,7 @@ namespace DocWorksQA.Tests
                 addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
-                createDraft.ClickUnityManualTree();
+               // createDraft.ClickUnityManualTree();
                 createDraft.ClickAnyNode();
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();
@@ -77,7 +77,7 @@ namespace DocWorksQA.Tests
                 //AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.LeftDraftDropDown(DraftSnapshot);
                 auth.RightDraftDropDown(DraftSnapshot);
-                //auth.HistoryRightTab();
+                auth.HistoryRightTab();
                 auth.ViewDraft1();
               //  addProject.SuccessScreenshot("History of created Draft SnapShot with content same as the Draft");
                 //auth.CloseViewDraft();

@@ -17,7 +17,7 @@ namespace DocWorksQA.Pages
         public By UNITYMANUAL_CLICK = By.XPath("//span[@class='ui-treenode-label ui-corner-all']");
         public By DISTRIBUTION_DROPDOWN = By.XPath("//div[@class='mat-select-trigger']");
         //public By DISTRIBUTION_TEXT = By.XPath("//span[@class='ng-tns-c18-245 ng-star-inserted'][text()='" +distributionName+ "']");
-        public By AVAILABLE_DISTRIBUTION = By.XPath("//mat-chip[@class='mat-chip mat-primary ng-star-inserted']/div/strong");
+        public By AVAILABLE_DISTRIBUTION = By.XPath("//mat-chip[@class='mat-chip mat-primary mat-standard-chip ng-star-inserted']/div/strong");
         public By AVAILABLE_DISTRIBUTION_1 = By.XPath("(//div[@class='mat-select-content ng-trigger ng-trigger-fadeInContent']/mat-option/span)[1]");
         public By AVAILABLE_DISTRIBUTION_2 = By.XPath("(//div[@class='mat-select-content ng-trigger ng-trigger-fadeInContent']/mat-option/span)[2]");
         public By OPENED_DISTRIBUTION = By.XPath("//div[@class='mat-select-value']");
@@ -37,13 +37,13 @@ namespace DocWorksQA.Pages
         public By LEFT_HTML_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/div/i[@class='tab-title-icon mdi mdi-24px mdi-code-not-equal-variant']");
         public By LEFT_MD_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@class='tab-title-icon mdi mdi-24px mdi-markdown']");
         public By LEFT_PREVIEW_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@class='tab-title-icon mdi mdi-24px mdi-eye']");
-        public By LEFT_HISTORY_TAB = By.XPath("//div[@class='authoring-tabview left-window']//div/i[@ng-reflect-message='history']");
+        public By LEFT_HISTORY_TAB = By.XPath("(//i[@class='tab-title-icon mdi mdi-24px mdi-history'])[1]");
         public By RIGHT_GDOC_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@class='tab-title-icon mdi mdi-24px mdi-file-document']");
         public By RIGHT_HTML_TAB = By.XPath("(//div[@class='authoring-tabview right-window']//div[@class='mat-tab-label mat-ripple ng-star-inserted'])[1]");
         public By Right_HTML_EDT = By.XPath("//app-authoring-tabbed-view[@ng-reflect-align='right']//div[@ng-reflect-ng-class='authoring-tabview-body']/div");
         public By RIGHT_MD_TAB = By.XPath("//div[@class='authoring-tabview right-window']//div/i[@class='tab-title-icon mdi mdi-24px mdi-markdown']");
         public By RIGHT_PREVIEW_TAB = By.XPath("(//div/i[@class='tab-title-icon mdi mdi-24px mdi-eye'])[2]");
-        public By RIGHT_HISTORY_TAB = By.XPath("//div[@id='mat-tab-label-2-4']/div/i[@class='tab-title-icon mdi mdi-24px mdi-history']");
+        public By RIGHT_HISTORY_TAB = By.XPath("(//i[@class='tab-title-icon mdi mdi-24px mdi-history'])[2]");
         public By EDT_LEFT_TAB = By.XPath("//div[@class='authoring-tabview left-window']/div[2]/div");
         public By EDT_RIGHT_TAB = By.XPath("//div[@class='authoring-tabview right-window']/div[2]/div");
         public By EDT_GDOC = By.XPath("(//div[@class='kix-appview-editor']//span[@class='goog-inline-block kix-lineview-text-block']/span)[1]");
@@ -64,7 +64,7 @@ namespace DocWorksQA.Pages
         public By SEARCH_ASSETTEXT = By.XPath("//input[@type='Search']");
         public By SEARCH_ASSET_BAR = By.XPath("//button//span/i[@class='mdi mdi-magnify mdi-24px']");
         public By HISTORY_VALID_DRAFT1 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[last()]");
-        public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list[@class='mat-list valid-draft ng-star-inserted']//div[@class='mat-list-item-content'])[1]");
+        public By HISTORT_VALID_DRAFT2 = By.XPath("(//mat-list-item[@class='draft-history-content mat-list-item']//div[@class='mat-list-item-content'])[1]");
         public By ViewDraft_DraftName = By.XPath("//input[@placeholder='Draft Name']");
 
         private ExtentTest test;
@@ -136,8 +136,9 @@ namespace DocWorksQA.Pages
             //System.Threading.Thread.Sleep(7000);
             System.Threading.Thread.Sleep(20000);
             Click(LEFT_DRAFTDROPDOWN);
-            String s = "(//mat-option//mat-list-item//div/span)[text()='"+ str +"']";
-            ClickByJavaScriptExecutor(By.XPath(s));
+            String s = "//div[@class='mat-list-item-content']//div[@fxlayout='row']//span[text()='" + str + "']";
+            // WaitForElement(By.XPath(s));
+            ScrollToElementAndClick(By.XPath(s));
             Info(test,"selected Draft:  "+str+"  in left Drop Down");
         }
 
@@ -179,8 +180,9 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             Click(RIGHT_DRAFTDROPDOWN);
-            String s = "(//mat-option//mat-list-item//div/span)" + "[text()='" + str + "']";
+            String s = "//div[@class='mat-list-item-content']//div[@fxlayout='row']//span[text()='" + str + "']";
             ClickByJavaScriptExecutor(By.XPath(s));
+            System.Threading.Thread.Sleep(5000);
             Info(test,"selected Draft:  " + str + "  in Right Drop Down");
         }
 

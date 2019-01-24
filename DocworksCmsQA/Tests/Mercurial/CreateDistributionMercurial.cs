@@ -20,8 +20,9 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            projectName = "SELENIUMOnoAJXYL";
 
-            projectName = db.GetOneProjectForManual_Mercurial();
+            // projectName = db.GetOneProjectForManual_Mercurial();
 
 
             driver = new DriverFactory().Create();

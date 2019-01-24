@@ -6,6 +6,7 @@ using System;
 using System.Text;
 using AventStack.ExtentReports;
 using DocworksCmsQA.DockworksApi;
+using Xunit;
 using System.Collections.Generic;
 
 namespace DocWorksQA.Tests
@@ -13,23 +14,47 @@ namespace DocWorksQA.Tests
 
     [TestFixture, Category("AddNodeModule")]
     [Parallelizable]
-    class AddNode : BeforeTestAfterTest
+    public class AddNode : BeforeTestAfterTest
     {
         private static IWebDriver driver;
         private ExtentTest test;
         string projectName;
         string distribution;
+        string projectParameter;
 
+        //  [Xunit.Theory]
         [OneTimeSetUp]
-        public void AddPProjectModule()
+
+        // [NUnit.Framework.Theory]
+
+        // [InlineData("3", "error : MercurialRepositoryUrl is required field", "Mercurial", "C854")]
+        // [InlineData("SELENIUMGITHUBPKAEO")]
+        // [InlineData("SELENIUMGITLABVHRIO")]
+        // [InlineData("SELENIUMOnoAJXYL")]
+
+        public void AddPProjectModule(String projectParameter)
         {
+            // projectName = projectParameter;
+            //   projectName = "SELENIUMGITLABVHRIO ";
+            // projectName = "SELENIUMOnoITBPH";
+            if (projectName == "null")
+            {
+                CreateProjectGitHub CPG = new CreateProjectGitHub();
+                CPG.TC03_ValidateCreateProjectForGitHubWithAllFields();
+                 
 
-           projectName = db.GetOneProjectForManual_GitHub();
+            }
+            else
+            {
 
-           distribution = db.GetOneDistributionFromProject(projectName);
-            driver = new DriverFactory().Create();
-            new LoginPage(driver).Login();
-            //System.Threading.Thread.Sleep(5000);
+                projectName = db.GetOneProjectForManual_GitHub();
+
+                distribution = db.GetOneDistributionFromProject(projectName);
+            }
+                driver = new DriverFactory().Create();
+                new LoginPage(driver).Login();
+                //System.Threading.Thread.Sleep(5000);
+            
         }
 
         [Test, Description("Verify User is able to Add Node Under Tree")]
@@ -55,8 +80,8 @@ namespace DocWorksQA.Tests
                 // String status2 = addProject.GetNotificationStatus();
                 // VerifyText(test, "adding a node " + NodeTitle + " is successful", status2, "Node: " + NodeTitle + " is Created with status:" + status2 + "", "Node is not created with status: " + status2 + "");
                 // addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Node: " + NodeTitle + " Created Successfully");
-                addProject.BackToProject();
-                node.ClickUnityManualTree();
+               
+              //  node.ClickUnityManualTree();
                 String Actual = node.GetTextOfNode(NodeSubTitle);
                 addProject.SuccessScreenshot("Created NodeSubTitle:  " + NodeSubTitle + "");
                 // VerifyEquals(test,NodeSubTitle, Actual, "Validation of the Node Created Under Tree is successful","Validation of Node creation is unsuccessful");
@@ -95,8 +120,8 @@ namespace DocWorksQA.Tests
                  //String status2 = addProject.GetNotificationStatus();
                //  VerifyText(test, "adding a node " + NodeTitle + " is successful", status2, "Node: " + NodeTitle + " is Created with status:" + status2 + "", "Node is not created with status: " + status2 + "");
                 //addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Node: " + NodeTitle + " Created Successfully");
-                addProject.BackToProject();
-                node.ClickUnityManualTree();
+                
+               // node.ClickUnityManualTree();
                 String Actual = node.GetTextOfNode(NodeSubTitle);
                  addProject.SuccessScreenshot("Created NodeSubTitle:  " + NodeSubTitle + "");
                  VerifyEquals(test,NodeSubTitle, Actual, "Validation of the Node Created Under Tree is successful","Validation of Node creation is unsuccessful");

@@ -21,7 +21,7 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = "SELENIUMGITLAB";
+            projectName = "SELENIUMGITLABHGGBW";
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -41,10 +41,11 @@ namespace DocWorksQA.Tests
                 addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
-                createDraft.ClickUnityManualTree();
+                //createDraft.ClickUnityManualTree();
                 createDraft.ClickAnyNode();
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();
+               // createDraft.ClickBlankRadioBtn();
                 createDraft.SelectCoderDraft();
                 addProject.SuccessScreenshot("Creating a Existing Draft");
                 createDraft.CreateDraft();
@@ -66,9 +67,9 @@ namespace DocWorksQA.Tests
                 //AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.LeftDraftDropDown(DraftSnapshot);
                 auth.RightDraftDropDown(DraftSnapshot);
-                //auth.HistoryRightTab();
-                // auth.ViewDraft1();
-                auth.CloseViewDraft();
+                auth.HistoryRightTab();
+                 auth.ViewDraft1();
+               // auth.CloseViewDraft();
                 addProject.SuccessScreenshot("History of created Draft SnapShot with content same as the Draft");
               //  auth.CloseViewDraft();
                 auth.GdocLeftTab();

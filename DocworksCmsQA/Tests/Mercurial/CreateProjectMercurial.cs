@@ -21,6 +21,7 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
         }
@@ -38,13 +39,13 @@ namespace DocWorksQA.Tests
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
-                projectName = "SELENIUMOno";
+                projectName = "SELENIUMOno" + GenerateRandomString(5);
                 addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("Ono");
                 addProject.EnterMercurialRepoPath();
                 addProject.EnterPublishedPath("Publishing path to create project");
-                addProject.EnterDescription("This is to create Project");
+                addProject.EnterDescription("This is to create Project for Mercurial");
                 addProject.ClickCreateProject();
                 //addProject.ClickNotifications();
                // String status = addProject.GetNotificationStatus();

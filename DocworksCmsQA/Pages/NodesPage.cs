@@ -16,7 +16,7 @@ namespace DocWorksQA.Pages
     class NodesPage : SeleniumHelpers.PageControl
     {
         public By UNITYMANUAL_TREE = By.XPath("//span[@class='ui-treenode-label ui-corner-all']");
-        public By UNITYMANUAL_SIDEBAR = By.XPath("//span[@class='ui-tree-toggler fa fa-fw fa-caret-right']");
+        public By UNITYMANUAL_SIDEBAR = By.XPath("//span[@class='ui-tree-toggler pi pi-fw ui-unselectable-text pi-caret-right']");
         public By NEW_NODE_CLICK = By.XPath("(//a[@class='ui-menuitem-link ui-corner-all ng-star-inserted'])[1]");
         public By NODE_Title = By.XPath("//input[@placeholder='Title']");
         public By CLICK_RENAME_SHORT_TITLE = By.XPath("(//a[@class='ui-menuitem-link ui-corner-all ng-star-inserted'])[4]");
@@ -28,6 +28,10 @@ namespace DocWorksQA.Pages
         public By LAST_CREATED_NODE = By.XPath("(//li/div[@class='ui-treenode-content ui-treenode-selectable'])[last()]");
         public By LAST_CREATED_NODE_SIDEBAR = By.XPath("(//li/div[@class='ui-treenode-content ui-treenode-selectable'])[last()]/span[@class='ui-tree-toggler fa fa-fw fa-caret-right']");
         public By SEARCH_BAR_TOC_LEVEL = By.XPath("//input[@placeholder='Search Documents...']");
+        public By HIGHLIGHT_NODE = By.XPath("//input[@class='mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-pristine ng-valid ng-touched'][@name='shortTitle']");
+        public By CLICK_DELETE_NODE = By.XPath("//span[@class='ui-menuitem-text'][text()='Delete Node']");
+        public By ACCEPT_BUTTON = By.XPath("//button[@class='mat-raised-button'][1]");
+        public By CONFIRM_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][text()=' Confirm ']");
         public ExtentTest test;
         public NodesPage(ExtentTest test,IWebDriver driver) : base(driver)
         {
@@ -38,17 +42,20 @@ namespace DocWorksQA.Pages
         {
             System.Threading.Thread.Sleep(7000);
             MoveToelementAndRightClick(UNITYMANUAL_TREE);
-            System.Threading.Thread.Sleep(7000);
+          //  System.Threading.Thread.Sleep(7000);
             Info(test,"Right Click on Unity Manual is performed");
         }
 
-        public void RightClickOnNode(String NodeSubTitle)
+        public void RightClickOnNode(String NodeName)
         {
             System.Threading.Thread.Sleep(7000);
-            RightClick(Node_SubTitle);
+            By xpath = By.XPath("//p-treenode//div//span[text()='" + NodeName + "']");
+            String str = GetText(xpath);
+            MoveToelementAndRightClick(xpath);
             System.Threading.Thread.Sleep(7000);
             Info(test, "Clicked on Node");
         }
+       
 
         public void ClickOnNewNode()
         {
@@ -56,11 +63,33 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             Info(test,"Clicked on New Node");
         }
-        public void ClickRenameShortTitleNode(String NodeSubTitle)
+
+        public void ClickOnDeleteNode(string nodeSubTitle)
         {
+            
+            Click(CLICK_DELETE_NODE);
+            System.Threading.Thread.Sleep(2000);
+            Click(CONFIRM_BUTTON);
+            //Info(test, "Deleted Node is :" + nodeSubTitle);
+        }
+
+        public void ClickRenameShortTitleNode(String NodeName)
+        {
+            System.Threading.Thread.Sleep(7000);
+            By xpath1 = By.XPath("//p-treenode//div//span[text()='" + NodeName + "']");
+            String str = GetText(xpath1);
             MoveToelementAndClick(CLICK_RENAME_SHORT_TITLE);
             System.Threading.Thread.Sleep(7000);
-            Info(test, "Clicked on New Node");
+            Clear(HIGHLIGHT_NODE);
+            EnterValue(HIGHLIGHT_NODE, "newnodename");
+            System.Threading.Thread.Sleep(7000);
+            Info(test, "Renamed a New Node :" + "newnodename");
+        }
+
+        public void AcceptButton(string nodeSubTitle)
+        {
+            Click(ACCEPT_BUTTON);
+            Info(test, "Clicked on AcceptButton");
         }
 
         public String EnterNodeTitle()
@@ -119,7 +148,7 @@ namespace DocWorksQA.Pages
         {
             Click(UNITYMANUAL_SIDEBAR);
             Info(test,"Clicked Unity Manual Side Bar for extensions");
-            System.Threading.Thread.Sleep(7000);
+            //System.Threading.Thread.Sleep(7000);
 
         }
 
@@ -162,7 +191,7 @@ namespace DocWorksQA.Pages
             By xpath = By.XPath("//p-treenode//div//span[text()='" + NodeName + "']");
             String str = GetText(xpath);
             ElementHighlight(WaitForElement(xpath));
-            Info(test, "The Text of Node Created is" + str);
+            Info(test, "The Text of Node Created " + str);
             return str;
         }
 
@@ -182,6 +211,7 @@ namespace DocWorksQA.Pages
         {
             Click(SEARCH_BAR_TOC_LEVEL);
             EnterValue(SEARCH_BAR_TOC_LEVEL, NodeSubTitle);
+            Clear(SEARCH_BAR_TOC_LEVEL);
             Info(test, "Searched Created node");
         }
     }

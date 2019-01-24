@@ -58,7 +58,7 @@ namespace DocWorksQA.Tests
                 DocHistory.ClickDoc_History();
                 DocHistory.ClickActions();
                 DocHistory.ClickCheckBoxCreateDraft();
-                //DocHistory.ClickCheckBoxRenameDraft();
+               ///k DocHistory.ClickCheckBoxRenameDraft();
                 //DocHistory.ClickCheckBoxAcceptDraftToLive();
                 // DocHistory.ClickEmptySpaceInNodeHistory();
                 //DocHistory.ClickActivityTab();

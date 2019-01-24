@@ -21,7 +21,7 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = "SELENIUMOno";
+            projectName = "SELENIUMOnoAJXYL";
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -41,7 +41,7 @@ namespace DocWorksQA.Tests
                 addProject.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
-                createDraft.ClickUnityManualTree();
+               // createDraft.ClickUnityManualTree();
                 createDraft.ClickAnyNode();
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();

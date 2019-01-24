@@ -57,16 +57,17 @@ namespace DocworksCmsQA.Tests.Taggroupscreation
                 String Acutal = createTagGroup.GetTagGroupName(TagGroupName);
                 addProject.SuccessScreenshot("Created TagGroup:  " + TagGroupName + "");
                 createTagGroup.ClickEditTagGroupIcon(TagGroupName);
-                createTagGroup.ClickEditTagGroup(TagGroupName);
+                createTagGroup.ClickEditTagGroups(TagGroupName);
                 //Editing,Renaming Draft
-                newTagGroupName = "TagGroupedit";
+                newTagGroupName = "NewTagGroupNamefromselenium" + GenerateRandomNumbers(5);
                createTagGroup.EditTagGroupName(newTagGroupName);
                 System.Threading.Thread.Sleep(2000);
                 createTagGroup.ClickTagGroupUpdate();
                 Console.WriteLine("Edited TagGroup");
+               // createTagGroup.BackToProject();
                 createTagGroup.EnterSearchTagInTagGroup(newTagGroupName);
                 System.Threading.Thread.Sleep(2000);
-
+                String Acuta2 = createTagGroup.GetTagGroupName(newTagGroupName);
                 Console.WriteLine(" searched Edited TagGroup");
             }
             catch (Exception e)
@@ -117,6 +118,7 @@ namespace DocworksCmsQA.Tests.Taggroupscreation
                 //Edit Tag
                 createTagGroup.ClickEditTagInManageTags("TAG123");
                 System.Threading.Thread.Sleep(2000);
+                createTagGroup.ClickAcceptTagName();
                 createTagGroup.EnterSearchInManageTagsAfterEdit("TAG123");
                // String Acutal1 = createTagGroup.GetTextOfEditedTag("TAG123");
                 System.Threading.Thread.Sleep(2000);

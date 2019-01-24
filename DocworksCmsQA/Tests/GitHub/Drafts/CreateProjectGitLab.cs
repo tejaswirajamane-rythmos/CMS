@@ -43,13 +43,14 @@ namespace DocWorksQA.Tests
 
 
 
-                projectName = "SELENIUMGitLabsmoke";
+                projectName = "SELENIUMGITLAB"+GenerateRandomString(5);;
                 addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
+               // addProject.selectimage();
                 addProject.SelectSourceControlProviderType("GitLab");
                 addProject.SelectRepository("AssetPullTest");
-                addProject.EnterPublishedPath("Publishing path to create project");
-                addProject.EnterDescription("This is to create Project");
+                addProject.EnterPublishedPath("Manual");
+                addProject.EnterDescription("This is to create Project for gitlab");
 
                 addProject.ClickCreateProject();
                 //addProject.ClickNotifications();

@@ -23,12 +23,13 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = db.GetOneProjectForManual_GitHub();
+            projectName = "SELENIUMGITHUBGDIRN";
+            //projectName = db.GetOneProjectForManual_GitHub();
 
-            distribution = db.GetOneDistributionFromProject(projectName);
+            //distribution = db.GetOneDistributionFromProject(projectName);
 
-          //  projectName = new CreateProjectsApi().CreateGitHubProject();
-          //  distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
+            //  projectName = new CreateProjectsApi().CreateGitHubProject();
+            //  distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -50,7 +51,7 @@ namespace DocWorksQA.Tests
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
-                createDraft.ClickUnityManualTree();
+                //createDraft.ClickUnityManualTree();
 
 
                 createDraft.ClickAnyNode();
@@ -77,10 +78,10 @@ namespace DocWorksQA.Tests
                 String str = DocHistory.GetHistoryMessage();
                 project.SuccessScreenshot("Created draft history details loaded Successfully");
                 VerifyContainsText(test,draftName,str, "Created draft history details loaded Successfully", "Created draft history details are not loaded Successfully");
-                project.BackToProject();
+                DocHistory.ClickOnNodeHistoryCloseButton();
 
-                
-               
+
+
             }
             catch (Exception ex)
             {
@@ -134,9 +135,9 @@ namespace DocWorksQA.Tests
                // DocHistory.ClickLeftCursor();
                // DocHistory.ClickAllDrafts();
                 DocHistory.RenameDraft(draftName, renameDraft);
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(2000);
                 DocHistory.ClickOnRightMarkToRename();
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(2000);
                 // project.ClickNotifications();
                 // String status3 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Draft Renamed Successfully");
@@ -211,6 +212,7 @@ namespace DocWorksQA.Tests
               //  String status4 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Draft Deleted Successfully");
                 project.BackToProject();
+                System.Threading.Thread.Sleep(2000);
                 DocHistory.ClickDoc_History();
                 //driver.Navigate().Refresh();
                 //DocHistory.ClickDoc_History();
@@ -238,7 +240,7 @@ namespace DocWorksQA.Tests
         {
             Console.WriteLine("Quiting Browser");
             CloseDriver(driver);
-            db.FindDistributionAndDelete(distribution);
+            //db.FindDistributionAndDelete(distribution);
             db.FindProjectAndDelete(projectName);
         }
 

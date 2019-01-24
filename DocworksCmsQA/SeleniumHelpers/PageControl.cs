@@ -12,6 +12,8 @@ namespace DocWorksQA.SeleniumHelpers
     {
        IWebDriver driver;
 
+        public IWebElement R1 { get; private set; }
+
         public PageControl(IWebDriver driver)
         {
             this.driver = driver;
@@ -262,15 +264,7 @@ namespace DocWorksQA.SeleniumHelpers
              executor.ExecuteScript("arguments[0].click();", ele);
            
         }
-        public void ClickByJavaScript1Executor(By by)
-        {
-           // IWebElement ele = WaitForElement(by);
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
-            //executor.ExecuteScript("arguments[0].click();", ele);
-            executor.ExecuteScript("document.getElementsByClassName('mat-suffix mdi mdi-check mdi-24px cursor-pointer').st‌​yle.display='block'.click();‌​");
-
-        }
-
+        
 
         public void ClearByJavaScriptExecutor(By by)
         {
@@ -317,6 +311,12 @@ namespace DocWorksQA.SeleniumHelpers
             act.MoveToElement(element);
             act.Perform();
         }
+        public void ContextClick(By by)
+        {
+            IWebElement ele = WaitForElement(by);
+            Actions builder = new Actions(driver);
+            builder.ContextClick(ele).Build().Perform();
+        }
 
         public void MoveToelementAndClick(By by)
         {
@@ -331,6 +331,12 @@ namespace DocWorksQA.SeleniumHelpers
             Actions builder = new Actions(driver);
             builder.MoveToElement(ele).ContextClick(ele).Build().Perform();
         }
+        public void ScrollToElementAndClick(By by)
+        {
+            IWebElement ele = WaitForElement(by);
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(ele).Click().Build().Perform();
+        }
 
 
 
@@ -344,7 +350,7 @@ namespace DocWorksQA.SeleniumHelpers
         {
             IWebElement ele = WaitForElement(by);
             Actions builder = new Actions(driver);
-            builder.MoveToElement(ele).ContextClick().Build().Perform();
+            builder.MoveToElement(ele).ContextClick(ele).Build().Perform();
 
 
         }
@@ -392,9 +398,7 @@ namespace DocWorksQA.SeleniumHelpers
             RemoveHighlight(element);
             return element;
         }
-
-
-        public void ElementHighlight(IWebElement element)
+         public void ElementHighlight(IWebElement element)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
 

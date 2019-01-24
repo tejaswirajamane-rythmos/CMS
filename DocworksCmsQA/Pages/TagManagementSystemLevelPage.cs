@@ -24,13 +24,13 @@ namespace DocWorksQA.Pages
         public By DISPLAY_GROUP_NAME_CHECKBOX = By.XPath("//span[@class='mat-checkbox-label'][contains(text(),'Display group name')]");
         public By COLOR_PICKER = By.XPath("//div[@class='ui-colorpicker-color']");
         //public By CSSVALUE = By.CssSelector(COLOR_PICKER);
-        public By CREATE_TAGGROUP = By.XPath("//button[@class='mat-raised-button mat-primary ng-star-inserted']/span[contains(text(),'CREATE')]");
+        public By CREATE_TAGGROUP = By.XPath("//span[@class='mat-button-wrapper'][text()=' CREATE ']");
         public By GET_GROUP_NAME = By.XPath("(//mat-list-item//div/span/span)[text()='TAGGGROUPXYZ']");
         public By EDIT_TAGGROUP_ICON = By.XPath("//i[@class='mdi mdi-dots-vertical mdi-24px cursor-pointer']");
         public By EDIT_TAG_GROUP = By.XPath("//button[@class='mat-menu-item'][contains(text(),'Edit Tag Group')]");
-        public By MANAGE_TAG_GROUP = By.XPath("(//button[@class='mat-menu-item']/div)[2]");
-        public By ADD_TAG = By.XPath("//button[@class='mat-raised-button secondary-btn']/span");
-        public By EDIT_TAG_IN_MANAGETAG_CHECKMARK = By.XPath("(//mat-icon//i[@class='mdi mdi-pencil mdi-24px'])[1]");
+        public By MANAGE_TAG_GROUP = By.XPath("(//button[@class='mat-menu-item'])[text()='Manage Tags']");
+        public By ADD_TAG = By.XPath("//span[@class='mat-button-wrapper'][text()='ADD TAG']");
+        public By PENCIL_BUTTON = By.XPath("(//mat-icon//i[@class='mdi mdi-pencil mdi-24px'])[1]");
        public By ENTER_TAG_NAME = By.XPath("//input[@name='newTagName']");
         public By CHM_By_CLASS = By.ClassName("mat-suffix mdi mdi-check mdi-24px cursor-pointer");
         public By CHECK_THE_TAGNAME = By.XPath("//i[@class='mat-suffix mdi mdi-check mdi-24px cursor-pointer']");
@@ -52,6 +52,7 @@ namespace DocWorksQA.Pages
         public By ENTER_EDIT_TAG = By.XPath("(//input[@class='form-control ng-pristine ng-valid ng-touched'])[2]");
         public By ENTER_TAG_NAME_1 = By.XPath("(//div[@class='custom-mat-input-wrapper']/input)[2]");
         //public By ENTER_TAG_NAME_2 = By.XPath("//div/input[@name='tagName']");
+        public By BACK_DROP = By.XPath("//div[@class='cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing']");
         public By DELETE_TAG_GROUP_CONFIRM_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][contains(text(),'Confirm')]");
         private readonly ExtentTest test;
 
@@ -65,6 +66,12 @@ namespace DocWorksQA.Pages
             WaitForElement(SYSTEM_LEVEL);
             Click(SYSTEM_LEVEL);
             Info(test,"Clicked on System Screen");
+        }
+        public void BackToProject()
+        {
+            
+            Click(BACK_DROP);
+            Info(test, "Clicked Back Drop");
         }
 
         public void ClickCreateTagGroup()
@@ -121,9 +128,9 @@ namespace DocWorksQA.Pages
 
         public void ClickEditTagInManageTags(string newTagName)
         {
-            Click(EDIT_TAG_IN_MANAGETAG_CHECKMARK);
+            Click(PENCIL_BUTTON);
             Info(test, "Clicked on EditTagIcon");
-            System.Threading.Thread.Sleep(7000);
+            System.Threading.Thread.Sleep(5000);
           //  MoveToelementAndClick(ENTER_TAG_NAME_1);
            // Info(test, "Clicked");
             //System.Threading.Thread.Sleep(7000);
@@ -135,7 +142,7 @@ namespace DocWorksQA.Pages
             SendKeysByJavaScriptExecutor(ENTER_TAG_NAME_1, newTagName);
             Info(test, "Edited tag  Name  is " + newTagName);
             System.Threading.Thread.Sleep(7000);
-            Click(CHECK_THE_TAGNAME);
+            ClickByJavaScriptExecutor(CHECK_THE_TAGNAME);
             //ClickByJavaScriptExecutor(CHECK_THE_TAGNAME);
             System.Threading.Thread.Sleep(7000);
             Info(test, "Clicked on Check Mark Icon");
@@ -296,9 +303,9 @@ namespace DocWorksQA.Pages
             Info(test,"Clicked on Manage tags");
         }
 
-        public void ClickEditTags()
+        public void ClickEditTagGroups(String TagGroupName)
         {
-            ClickByJavaScriptExecutor(EDIT_TAG_GROUP);
+            Click(EDIT_TAG_GROUP);
             Info(test,"Clicked on Edit Tag Group");
         }
         public void ClickAddTag()

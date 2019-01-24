@@ -56,7 +56,7 @@ namespace DocworksCmsQA.DatabaseScripts
             foreach (var currentProject in projectList)
             {
 
-                if (currentProject.GetValue("ProjectName").ToString().ToLower().Contains("api")) { 
+                if (currentProject.GetValue("ProjectName").ToString().Contains("SELENIUM")) { 
                     var distributionFilter = builder.Eq("Status", 2) & builder.Eq("IsActive", true) & builder.Eq("ProjectId", currentProject.GetValue("_id"));
                     var distributionList = DB.GetCollection<BsonDocument>("Distribution").Find(distributionFilter).ToListAsync().Result;
 

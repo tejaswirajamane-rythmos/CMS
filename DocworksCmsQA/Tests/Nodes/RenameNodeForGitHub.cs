@@ -22,10 +22,13 @@ namespace DocworksCmsQA.Tests.Nodes
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
+            projectName = "SELENIUMGITHUBKCBVJ";
+            // projectName = "SELENIUMGITLABVHRIO ";
+            //projectName = "SELENIUMOnoITBPH";
 
-            projectName = db.GetOneProjectForManual_GitHub();
+            // projectName = db.GetOneProjectForManual_GitHub();
 
-            distribution = db.GetOneDistributionFromProject(projectName);
+            // distribution = db.GetOneDistributionFromProject(projectName);
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
         }
@@ -53,8 +56,8 @@ namespace DocworksCmsQA.Tests.Nodes
                 //String status2 = addProject.GetNotificationStatus();
                 //  VerifyText(test, "adding a node " + NodeTitle + " is successful", status2, "Node: " + NodeTitle + " is Created with status:" + status2 + "", "Node is not created with status: " + status2 + "");
                 //addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Node: " + NodeTitle + " Created Successfully");
-                addProject.BackToProject();
-                node.ClickUnityManualTree();
+               // addProject.BackToProject();
+               // node.ClickUnityManualTree();
                 String Actual = node.GetTextOfNode(NodeSubTitle);
                 addProject.SuccessScreenshot("Created NodeSubTitle:  " + NodeSubTitle + "");
                 VerifyEquals(test, NodeSubTitle, Actual, "Validation of the Node Created Under Tree is successful", "Validation of Node creation is unsuccessful");
@@ -63,8 +66,16 @@ namespace DocworksCmsQA.Tests.Nodes
                 node.GetTextOfNodeAfterSearch(NodeSubTitle);
                 System.Threading.Thread.Sleep(2000);
                 node.RightClickOnNode(NodeSubTitle);
-              //  System.Threading.Thread.Sleep(2000);
-               // node.ClickRenameShortTitleNode(NodeSubTitle);
+                node.ClickRenameShortTitleNode(NodeSubTitle);
+               /// System.Threading.Thread.Sleep(2000);
+                node.AcceptButton(NodeSubTitle);
+                System.Threading.Thread.Sleep(2000);
+                driver.Navigate().Refresh();
+                node.SearchBarAtTocLevel("newnodename");
+                //System.Threading.Thread.Sleep(2000);
+                node.GetTextOfNodeAfterSearch("newnodename");
+                Console.WriteLine("Edited name is:" + "newnodename");
+
 
             }
             catch (Exception e)

@@ -23,7 +23,7 @@ namespace DocWorksQA.Tests
         {
             // projectName = new CreateProjectsApi().CreateGitHubProject();
             //distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
-            projectName = "SELENIUMGITHUB";
+            projectName = "SELENIUMGITHUBKCBVJ";
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -46,7 +46,7 @@ namespace DocWorksQA.Tests
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
-                createDraft.ClickUnityManualTree();
+               // createDraft.ClickUnityManualTree();
                 createDraft.ClickAnyNode();
                 createDraft.ClickNewDraft();
                 String draftName = createDraft.EnterValidDraftName();
@@ -71,11 +71,11 @@ namespace DocWorksQA.Tests
                 System.Threading.Thread.Sleep(5000);
                 Doc_HistoryPage DocHistory = new Doc_HistoryPage(test, driver);
                 DocHistory.ClickDoc_History();
-                driver.Navigate().Refresh();
-                DocHistory.ClickDoc_History();
-                System.Threading.Thread.Sleep(20000);
+                //driver.Navigate().Refresh();
+               // DocHistory.ClickDoc_History();
+                System.Threading.Thread.Sleep(2000);
                 String str = DocHistory.GetHistoryMessage();
-               // project.SuccessScreenshot("Accept Draft To Live history details loaded Successfully");
+                project.SuccessScreenshot("Accept Draft To Live history details loaded Successfully");
                // VerifyText(test,"Service Staging pushed Draft "+draftName+" to Live",str, "Accept Draft To Live history details loaded Successfully", "Accept Draft To Live history details are not loaded Successfully");
                 DocHistory.ClickOnNodeHistoryCloseButton();
 

@@ -21,8 +21,9 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = new CreateProjectsApi().CreateGitHubProject();
-            distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
+            projectName = "scriptproject21";
+            //projectName = new CreateProjectsApi().CreateGitHubProject();
+            //distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);

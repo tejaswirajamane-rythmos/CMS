@@ -22,7 +22,7 @@ namespace DocWorksQA.Tests
         {
             projectName = db.GetOneProjectForManual_GitHub();
 
-           // projectName = "SELENIUMGITHUB2smoke";
+            projectName = "SELENIUMGITHUBKCBVJ";
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);

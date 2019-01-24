@@ -9,8 +9,8 @@ namespace DocWorksQA.Pages
 {
     class Doc_HistoryPage : SeleniumHelpers.PageControl
     {
-        public By DOC_HISTORY_BUTTON = By.XPath("(//button[@class='mat-raised-button'])[3]/span");
-        public By SETTINGS_BUTTON = By.XPath("(//span[@class='mat-button-wrapper'])[10]");
+        public By DOC_HISTORY_BUTTON = By.XPath("//span[@class='mat-button-wrapper']//i[@class='mdi mdi-history mdi-18px']");
+        public By SETTINGS_BUTTON = By.XPath("//i[@class='mdi mdi-settings mdi-18px']");
         public By HISTORY_TEXT = By.XPath("(//div[@ngclass='node-history-details']//div[@class='mat-line'])[position()=1]");
         public By NODEHISTORY_CLOSEBUTTON = By.XPath("//i[@class='mdi mdi-close mdi-24px']");
         public By ACTIONS_BUTTON = By.XPath("//div[@class='mat-select-value']/span[contains(text(),'Actions')]");
@@ -45,8 +45,8 @@ namespace DocWorksQA.Pages
         public By ALLDRAFT = By.XPath("(//mat-panel-title[@class='mat-expansion-panel-header-title'])[1]");
         public By RENAMEDRAFT = By.XPath("(//div[@fxlayoutalign='space-between center']/span)[text()=@draftName]");
         public By DELETEDRAFT_ICON = By.XPath("(//mat-icon/i[@class='mdi mdi-delete mdi-24px cursor-pointer'])[last()]");    
-        public By DELETEDRAFT_BUTTON = By.XPath("//button[@class='mat-raised-button mat-primary']/span[text()='Delete']");
-        public By RENAME_RIGHT_MARK = By.XPath("(//button[@class='mat-menu-item']/i)[1]");
+        public By DELETEDRAFT_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][text()='Delete']");
+        public By RENAME_RIGHT_MARK = By.XPath("(//div[@class='mat-menu-ripple mat-ripple'])[1]");
         public By LIST_OF_DRAFTS = By.XPath("//div[@class='tag-editing']/div/span");
         private ExtentTest test;
         public Doc_HistoryPage(ExtentTest test, IWebDriver driver) : base(driver)
@@ -63,9 +63,12 @@ namespace DocWorksQA.Pages
         public void Settings_Button()
         {
             WaitForElement(SETTINGS_BUTTON);
+   
             Click(SETTINGS_BUTTON);
             Info(test, "Clicked on Settings Button.");
         }
+
+       
 
         public String GetHistoryMessage()
         {
@@ -252,21 +255,22 @@ namespace DocWorksQA.Pages
         public void ClickDeleteDraftIcon(String RenameDraft)
         {
           //  Click(DELETEDRAFT_ICON);
-            MoveToelementAndClick(By.XPath("(//div[@class='tag-editing']//div/span[text()='" + RenameDraft + "\'])//following::mat-icon[1]"));
+            MoveToelementAndClick(By.XPath("(//div[@class='tag-editing']//div/span[text()='" + RenameDraft + "'])//following::mat-icon[1]"));
 
             Info(test,"Clicked on Delete draft Icon");
         }
 
         public void ClickDeleteDraftButton()
         {
-          //  WaitForElement(DELETEDRAFT_BUTTON);
+           WaitForElement(DELETEDRAFT_BUTTON);
             Click(DELETEDRAFT_BUTTON);
             Info(test, "Clicked on Delete draft Button");
         }
 
         public void ClickOnRightMarkToRename()
         {
-            Click(RENAME_RIGHT_MARK);
+            MoveToelementAndClick(RENAME_RIGHT_MARK);
+           // ClickByJavaScriptExecutor(RENAME_RIGHT_MARK);
             Info(test,"Clicked on RightMarkToRename");
         }
 

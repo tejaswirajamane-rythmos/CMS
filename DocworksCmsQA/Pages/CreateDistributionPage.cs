@@ -14,6 +14,7 @@ namespace DocWorksQA.Pages
         public By ENTER_SEARCH = By.XPath("//input[@type='Search']");
         public By GET_TITLE = By.XPath("//mat-card/mat-card-title/div");
         public By SETTINGS = By.XPath("//mat-card/mat-card-title/div//a");
+        public By PROJECT_SETTINGS = By.XPath("//button[@class='mat-menu-item'][text()='Project Settings']");
         public By DISTRIBUTIONS = By.XPath("//button[contains(text(),'Distributions')]");
             //By.XPath("(//button[@class='mat-menu-item'])[2]");
         public By DISTRIBUTION_NAME = By.XPath("//input[@placeholder='Distribution Name']");
@@ -28,14 +29,14 @@ namespace DocWorksQA.Pages
         public By CLEAR_BUTTON = By.XPath("(//button[@class='mat-raised-button']/span)[1]");
         public By CLOSE_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']");
         //public By CREATE_DISTRIBUTION = By.XPath("//button//span[contains(text(),'Create Distribution')]");
-        public By CREATE_DISTRIBUTION = By.XPath("//button[@class='mat-raised-button mat-primary ng-star-inserted']");
+        public By CREATE_DISTRIBUTION = By.XPath("//span[@class='mat-button-wrapper'][text()='Create Distribution']");
         public By AVAIL_DISTRIBUTION_NAME = By.XPath("(//mat-chip/div/strong)");
         public By AVAIL_DISTRIBUTION_EDIT = By.XPath("//mat-chip/div/mat-icon/i");
         //public By AVAIL_DISTRIBUTION_CREATED_DT = By.XPath("//mat-chip/small/strong");
         public By INVALID_TITLE_LENGTH = By.XPath("//mat-error[@class='mat-error ng-star-inserted']");
-                                                   //mat-error[@class="mat-error ng-star-inserted"]
-        public By TOC_PATH = By.XPath("//input[@placeholder='TOC Path']");
+           public By TOC_PATH = By.XPath("//input[@placeholder='TOC Path']");
         public By ERROR = By.XPath("//mat-error[@role='alert']");
+        public By DELETE_DISTRIBUTION = By.XPath("//i[@class='mdi mdi-delete mdi-18px cursor-pointer']");
 
 
         private ExtentTest test;
@@ -64,6 +65,11 @@ namespace DocWorksQA.Pages
        * Description: This method is used to get the project Title
        */
         public String GetProjectTitle()
+        {
+            Info(test, "ProjectTitle is" + this.GetText(GET_TITLE));
+            return this.GetText(GET_TITLE);
+        }
+        public String Project()
         {
             Info(test, "ProjectTitle is" + this.GetText(GET_TITLE));
             return this.GetText(GET_TITLE);
@@ -97,7 +103,7 @@ namespace DocWorksQA.Pages
         */
         public String EnterDistirbutionName()
         {
-            String DistName = "SELENIUMDIST";
+            String DistName = "SELENIUMDIST"+ GenerateRandomString(5);
             EnterValue(DISTRIBUTION_NAME, DistName);
             Info(test, "Distribution Name is" + DistName);
             return DistName;
@@ -180,6 +186,11 @@ namespace DocWorksQA.Pages
                     this.Click(BRANCH_OPTIONS_WITHTOC);
             Info(test, "Selected the branch");
         }
+        public void ClickDeleteDistribution()
+        {
+            Click(DELETE_DISTRIBUTION);
+            Info(test, "Clicked on Delete Distribution Button");
+        }
 
         public void SelectBranch(String value)
         {
@@ -258,6 +269,7 @@ namespace DocWorksQA.Pages
        */
         public void ClickCreateDistribution()
         {
+            WaitForElement(CREATE_DISTRIBUTION);
             Click(CREATE_DISTRIBUTION);
             Info(test, "Clicked on Create distribution");
         }

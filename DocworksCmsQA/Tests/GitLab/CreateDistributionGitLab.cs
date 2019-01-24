@@ -20,8 +20,8 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = db.GetOneProjectForManual_GitLab();
-            // projectName = "SELENIUMGITLab";
+           // projectName = db.GetOneProjectForManual_GitLab();
+             projectName = "profilepictest";
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -46,7 +46,7 @@ namespace DocWorksQA.Tests
                 distmodule.ClickDistribution();
                String  distributionName = distmodule.EnterDistirbutionName();
                 System.Threading.Thread.Sleep(5000);
-                distmodule.SelectBranch("DocworksManual3");
+                distmodule.SelectBranch("DocWorksManual3");
                 distmodule.EnterTocPath();
                 distmodule.EnterDescription("This is to create a distribution With TOC Path");
               

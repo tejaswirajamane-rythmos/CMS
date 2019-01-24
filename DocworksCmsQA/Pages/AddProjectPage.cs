@@ -14,7 +14,7 @@ namespace DocWorksQA.Pages
         public By ADDPROJECT_BUTTON = By.XPath("//button[contains(text(),'Create Project')]");
         public By PROJECT_TITLE_FIELD = By.XPath("//input[@placeholder='Project Title']");
         public By BELL_NOTIFICATION = By.XPath("//mat-chip[@class='mat-chip notification cursor-pointer mat-warn mat-chip-selected ng-star-inserted']");
-        public By NOTIFICATION_MESSAGE = By.XPath("//div[@class='operation-status-wrapper custom-tooltip-parent']//small");
+        public By NOTIFICATION_MESSAGE = By.XPath("//small//div[@class='oneline-ellipsis']");
         public By NOTIFICATION_PROGRESS = By.XPath("//mat-progress-spinner[@class='mat-progress-spinner mat-primary mat-progress-spinner-indeterminate-animation']");
         public By NOTIFICATION_NAME = By.XPath("//div[@class='mat-list-text']/p[@class='mat-line mb-5']/span");
         public By NOTIFICATION_STATUS = By.XPath("//div[@class='mat-list-text']/p[@class='mat-line mb-5']/small[@class='bg_Success']");
@@ -30,20 +30,26 @@ namespace DocWorksQA.Pages
         public By MERCURIAL_REPO_PATH = By.XPath("//input[@placeholder='Mercurial Repo Path']");
         public By SIZE_EXCEED_100 = By.XPath("(//mat-dialog-content//div/small)[1]");
         public By SIZE_EXCEED_1000 = By.XPath("(//mat-dialog-content//div/small)[4]");
-        public By DESCRIPTION_FIELD = By.XPath("//textarea[@placeholder='Description']");
+        public By DESCRIPTION_FIELD = By.XPath("(//div[@class='mat-form-field-infix'])[7]");
+        public By DESCRIPTION_FIELD1 = By.XPath("//textarea[@id='mat-input-15']");
         public By PUBLISHED_PATH = By.XPath("//input[@placeholder='Published Path']");
         public By BACK_BUTTON = By.XPath("//button[@class='mat-raised-button']/span");
         public By CLEAR_BUTTON = By.XPath("//button[@class='mat-raised-button mat-warn']/span");
-        public By CREATE_PROJECT_BUTTON = By.XPath("(//span[@class='mat-button-wrapper'])[4]");
+        public By CREATE_PROJECT_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][text()=' Create Project ']");
         public By INVALID_TITLE_LENGTH = By.XPath("//mat-error[@class='mat-error ng-star-inserted']");
         public By FOOTER_TEXT = By.XPath("//*/snack-bar-container/app-custom-snack-bar-component");
-        public By NOTIFICATION_BELL = By.XPath("//i[@class='mdi mdi-bell mdi-24px']");
+        public By SETTINGS_BUTTON = By.XPath("//i[@class='mdi mdi-settings mdi-24px']");
+        public By PROJECT_SETTINGS = By.XPath("//button[@class='mat-menu-item'][text()='Project Settings']");
+        public By UPDATE_PROJECT_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][text()=' Update Project ']");
+        public By NOTIFICATION_BELL = By.XPath("//i[@class='mdi mdi-bell mdi-24px hover-text-white']");
         public By GET_CREATEDPROJECT = By.XPath("//div/mat-list-item/div/div[2]");
-        public By BACKDROP = By.XPath("//div[@class='mat-drawer-backdrop mat-drawer-shown']");
+        public By BACKDROP = By.XPath("//div[@class='mat-drawer-backdrop ng-star-inserted mat-drawer-shown']");
         public By DESCRIPTION_MAT_CARD = By.XPath("//mat-card-content/p");
         public By FAVOURITE_ICON = By.XPath("(//i[@class='mdi-star-outline mdi mdi-24px'])[1]");
         public By AUTHORING_BUTTON = By.XPath("(//a[@class='mat-tab-link ng-star-inserted'])[contains(text(),'Authoring')]");
         public By ERROR = By.XPath("//mat-error");
+        public By SETTINGS = By.XPath("//mat-card/mat-card-title/div//a");
+        public By EDITPROJECTCLICK = By.XPath("//div[@class='cdk-overlay-pane']");
 
         public object DriverWaitUtil { get; private set; }
 
@@ -55,7 +61,18 @@ namespace DocWorksQA.Pages
             this.test = test;
         }
 
-
+        public void ClickUpdateProject()
+        {
+            Click(UPDATE_PROJECT_BUTTON);
+            Info("Clicked on Update Project button");
+        }
+        public void ClickProjectSettingsButton()
+        {
+            Click(SETTINGS_BUTTON);
+            Click(PROJECT_SETTINGS);
+           
+            //Info("Clicked on  Project Settings inside settings button");
+        }
 
         public Boolean IsProjectEnable()
         {
@@ -98,23 +115,17 @@ namespace DocWorksQA.Pages
             //String path = TakeScreenshot();
             SuccessScreenshot(path, message);
         }
-
-
-
-
         public String GetDescriptionSize()
         {
             Info(test, "Description Size is" + this.GetSize(DESCRIPTION_FIELD));
             return this.GetSize(DESCRIPTION_FIELD);
         }
-
         public String GetDescriptionLength()
         {
             String str = GetText(SIZE_EXCEED_1000).ToString();
             Info(test, "Description Exceeds 1000 characters*** " + str);
             return str;
         }
-
         public String GetDescriptionText()
         {
             String str = GetText(DESCRIPTION_MAT_CARD).ToString();
@@ -127,7 +138,6 @@ namespace DocWorksQA.Pages
             Info(test, "Title Exceeds 100 characters*** " + str);
             return str;
         }
-
         public void ClickDashboard()
         {
             String url = GetDriver().Url;
@@ -137,14 +147,12 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             //Info(test, "Clicked On DashBoard");
         }
-
         public String GetURl()
         {
             String url = GetDriver().Url;
             Info(test, "Current URL is " + url);
             return url;
         }
-
         public void NavigateDistributionUsingUrl(Dictionary<string, string> map)
         {
             String url = GetDriver().Url;
@@ -154,9 +162,9 @@ namespace DocWorksQA.Pages
             System.Threading.Thread.Sleep(7000);
             //Info(test, "Clicked On DashBoard");
         }
-
-        public void ClickAddProject() {
-            ClickDashboard();
+        public void ClickAddProject()
+        {
+            //ClickDashboard();
             Click(ADDPROJECT_BUTTON);
             WaitForElement(CREATE_PROJECT_BUTTON);
             Info(test, "Clicked on AddProject Button.");
@@ -233,7 +241,19 @@ namespace DocWorksQA.Pages
             return FooterText;
         }
 
-        public void EnterDescription(String description) {
+        public void EnterDescription(String description)
+        {
+           
+            //ElementHighlight(By.XPath("hgf"));
+            WaitForElement(DESCRIPTION_FIELD).Click();
+            
+            Clear(DESCRIPTION_FIELD1);
+            EnterValue(DESCRIPTION_FIELD, description);
+            Info(test, "Entered Description : " + description);
+        }
+        public void CLearAndEnterDescription(String description)
+        {
+            ClickByJavaScriptExecutor(DESCRIPTION_FIELD);
             EnterValue(DESCRIPTION_FIELD, description);
             Info(test, "Entered Description : " + description);
         }
@@ -342,7 +362,7 @@ namespace DocWorksQA.Pages
 
         public void BackToProject()
         {
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
             WaitForElement(BACKDROP);
             MoveToelementAndClick(BACKDROP);
             Info(test, "Clicked On BackDrop");
@@ -374,7 +394,7 @@ namespace DocWorksQA.Pages
 
         public void SelectRepository(String value)
         {
-            System.Threading.Thread.Sleep(50000);
+            System.Threading.Thread.Sleep(3000);
             if (!GetText(REPOSITORY_DROPDOWN).Equals(value))
             {
                 this.Click(REPOSITORY_DROPDOWN);
@@ -446,18 +466,12 @@ namespace DocWorksQA.Pages
             EnterValue(MERCURIAL_REPO_PATH,path);
             Info(test, "Entered Mercurial repo Path as" + path);
         }
-
-
-
-
         public void ClickRepository()
         {
             this.Click(REPOSITORY_DROPDOWN);
             Info(test, "Clicked On the Repository DropDown");
             this.Click(REPOSITORY_VALUE);
             Info(test, "selected the Reppository_Value from drop down");
-
-
         }
 
         public void ClickFavouriteIcon()

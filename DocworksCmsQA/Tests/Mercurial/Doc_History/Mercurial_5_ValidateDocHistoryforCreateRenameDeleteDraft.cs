@@ -23,7 +23,11 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = db.GetOneProjectForManual(3);
+
+            // projectName = "SELENIUMGITLABPEEHH";
+            // projectName = "SELENIUMGITHUBGDIRN";
+            projectName = "SELENIUMOnoKAYJF";
+            //projectName = db.GetOneProjectForManual(3);
 
             //distribution = db.GetOneDistributionFromProject(projectName);
 
@@ -49,7 +53,7 @@ namespace DocWorksQA.Tests
                 project.SearchForProject(projectName);
                 CreateDraftPage createDraft = new CreateDraftPage(test, driver);
                 createDraft.ClickOpenProject();
-                createDraft.ClickUnityManualTree();
+               // createDraft.ClickUnityManualTree();
                 createDraft.ClickAnyNode();
                 CreateDraftPage CreateDraft = new CreateDraftPage(test, driver);
 
@@ -109,7 +113,7 @@ namespace DocWorksQA.Tests
               //  project.ClickNotifications();
               //  String status3 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Draft Renamed Successfully");
-              //  project.BackToProject();
+                project.BackToProject();
                 DocHistory.ClickDoc_History();
                 //driver.Navigate().Refresh();
                 //DocHistory.ClickDoc_History();
@@ -152,7 +156,7 @@ namespace DocWorksQA.Tests
               //  project.ClickNotifications();
              //   String status4 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Draft Deleted Successfully");
-              //  project.BackToProject();
+                project.BackToProject();
                 DocHistory.ClickDoc_History();
                 //driver.Navigate().Refresh();
                 //DocHistory.ClickDoc_History();
