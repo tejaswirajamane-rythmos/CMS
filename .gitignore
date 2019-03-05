@@ -3,8 +3,8 @@
 ################################################################################
 
 /.vs/DocworksCmsQA/v15
-/DocworksCmsQA/bin/Release/Reports/Screenshot
-/DocworksCmsQA/bin/Release/Reports
+/DocworksCmsQA/bin/*.*
+/DocworksCmsQA/obj/*.*
 /packages/System.Collections.4.3.0
 /packages/System.Collections.Concurrent.4.3.0
 /packages/System.Diagnostics.Debug.4.3.0/lib
