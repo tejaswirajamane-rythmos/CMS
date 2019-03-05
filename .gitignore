@@ -5,3 +5,5 @@
 /.vs/DocworksCmsQA/v15
 
 /packages/*.*
+/DocworksCmsQA/obj/*.*
+/DocworksCmsQA/bin/*.*
