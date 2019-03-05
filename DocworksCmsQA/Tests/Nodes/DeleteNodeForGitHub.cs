@@ -27,11 +27,12 @@ namespace DocworksCmsQA.Tests.Nodes
            // projectName = "SELENIUMOnoITBPH";
 
 
-            // projectName = db.GetOneProjectForManual_GitHub();
-
-            // distribution = db.GetOneDistributionFromProject(projectName);
+             
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
+            projectName = db.GetOneProjectForManual_GitHub();
+
+            distribution = db.GetOneDistributionFromProject(projectName);
         }
         [Test, Description("Verify User is able to Delete Node Under Tree")]
         public void TC1_VerifyUserAbleDeleteNodeForGitHub()

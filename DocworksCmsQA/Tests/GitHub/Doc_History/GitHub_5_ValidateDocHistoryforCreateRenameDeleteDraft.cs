@@ -23,7 +23,7 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = "SELENIUMGITHUBGDIRN";
+            projectName = "ProjectforPublishTest";
             //projectName = db.GetOneProjectForManual_GitHub();
 
             //distribution = db.GetOneDistributionFromProject(projectName);

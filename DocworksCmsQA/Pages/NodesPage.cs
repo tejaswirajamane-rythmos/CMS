@@ -32,6 +32,11 @@ namespace DocWorksQA.Pages
         public By CLICK_DELETE_NODE = By.XPath("//span[@class='ui-menuitem-text'][text()='Delete Node']");
         public By ACCEPT_BUTTON = By.XPath("//button[@class='mat-raised-button'][1]");
         public By CONFIRM_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][text()=' Confirm ']");
+        public By INSTALLINGUNITY_DROPDOWN_BUTTON = By.XPath("(//span[contains(.,'InstallingUnity')]//preceding-sibling::span)[1]");
+        public By SOURCE_NODE_FORDRAGANDDROP = By.XPath("//div[@class='ng-star-inserted']/span[contains(text(),'InstallingUnity Overview')]");
+       // public By TARGET_FOLDER_NODE = By.XPath("(//div[@class='ui-treenode-content ui-treenode-selectable'])[1]");
+        public By TARGET_FOLDER_NODE = By.XPath("(//div//span[contains(text(),'UnityManual')])[1]");
+        public By TARGET_NODE_FORDRAGANDDROP = By.XPath("(//li[@class='ui-treenode-droppoint ng-star-inserted'])[11]");
         public ExtentTest test;
         public NodesPage(ExtentTest test,IWebDriver driver) : base(driver)
         {
@@ -56,6 +61,17 @@ namespace DocWorksQA.Pages
             Info(test, "Clicked on Node");
         }
        
+        public void ClickDropDownBtn()
+        {
+            Click(INSTALLINGUNITY_DROPDOWN_BUTTON);
+            Info(test, "Clciked on Drop Down" + INSTALLINGUNITY_DROPDOWN_BUTTON);
+        }
+        public void ChangeNodeLocation()
+        {
+            MoveAndDrop(SOURCE_NODE_FORDRAGANDDROP, TARGET_FOLDER_NODE);
+            System.Threading.Thread.Sleep(2000);
+            Info(test, "DragAndDrop operation is Done");
+        }
 
         public void ClickOnNewNode()
         {

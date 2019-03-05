@@ -6,12 +6,14 @@ using DocWorksQA.Pages;
 using System.Diagnostics;
 using AventStack.ExtentReports;
 using System.Collections.Generic;
+using DocWorksQA.Tests;
+using NUnit.Framework.Internal;
 
-namespace DocWorksQA.Tests
+namespace DocworksCmsQA.Tests.Mercurial
 {
-    [TestFixture, Category("Create Project")]
+    [TestFixture, Category("Mercurial")]
     [Parallelizable]
-    class CreateProjectMercurial : BeforeTestAfterTest
+    class CreateUpdateAndDeleteProjectForMercurial : BeforeTestAfterTest
     {
         private IWebDriver driver;
         private ExtentTest test;
@@ -19,17 +21,13 @@ namespace DocWorksQA.Tests
 
 
         [OneTimeSetUp]
-        public void AddPProjectModule()
+        public void AddProjectModule()
         {
-
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
         }
-
-
-
-        [Test, Description("Verifying User is able to Add Project For Mercurial with all Fields")]
-        public void TC01_ValidateCreateProjectForMercurialWithAllFields()
+        [Test, Description("Verifying user is able to Create,Update and Delete Project")]
+        public void TC01_ValidateCreateUpdateDeleteProjectForMercurialWithAllFields()
         {
             try
             {
@@ -44,19 +42,29 @@ namespace DocWorksQA.Tests
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("Ono");
                 addProject.EnterMercurialRepoPath();
-                addProject.EnterPublishedPath("Publishing path to create project");
+                addProject.EnterPublishedPath("Manual");
                 addProject.EnterDescription("This is to create Project for Mercurial");
                 addProject.ClickCreateProject();
                 //addProject.ClickNotifications();
-               // String status = addProject.GetNotificationStatus();
-               // addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Project Created Successfully");
-               // VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                // String status = addProject.GetNotificationStatus();
+                // addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Project Created Successfully");
+                // VerifyText(test, "creating a project " + projectName + " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
                 addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot(addProject.GET_TITLE, "Project Available on Search");
                 VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
-              
+                Console.WriteLine("Project Name is  " + projectName);
+                //Updating project
+                addProject.ClickProjectSettingsButton();
+                addProject.EnterDescription("This is to update Project Description for GitHub");
+                addProject.ClickUpdateProject();
+                System.Threading.Thread.Sleep(2000);
+                Console.WriteLine("Project Description has been updated");
+                System.Threading.Thread.Sleep(2000);
+                //Deleting project
+                addProject.ClickDeleteProjectButton();
+                Console.WriteLine("Project Deleted successfully");
             }
             catch (Exception e)
             {
@@ -66,19 +74,11 @@ namespace DocWorksQA.Tests
             }
 
         }
-
-
-
         [OneTimeTearDown]
         public void CloseBrowser()
         {
             Console.WriteLine("Quiting Browser");
-
             CloseDriver(driver);
-            db.FindProjectAndDelete(projectName);
         }
-
-
     }
-
 }

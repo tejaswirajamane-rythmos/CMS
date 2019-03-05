@@ -23,7 +23,7 @@ namespace DocWorksQA.Tests
         {
             // projectName = new CreateProjectsApi().CreateGitHubProject();
             //distributionName = new CreateDistributionsApi().CreateGitHubDistribution(projectName)["distributionName"];
-            projectName = "SELENIUMGITHUBKCBVJ";
+            projectName = "ProjectForManualTest";
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             System.Threading.Thread.Sleep(5000);
@@ -55,7 +55,7 @@ namespace DocWorksQA.Tests
                 createDraft.CreateDraft();
                 // project.ClickNotifications();
                 // String status2 = project.GetNotificationStatus();
-                 project.SuccessScreenshot("Existing Draft got Created Successfully");
+                 project.SuccessScreenshot(createDraft.GetTextOfdraftName(draftName),"Existing Draft got Created Successfully");
                 //project.SuccessScreenshot("Blank Draft got Created Successfully");
                 //   VerifyText(test, "creating a draft " + draftName + " in UnityManual is successful", status2, "Draft: " + draftName + " is Created with status:" + status2 + "", "Draft is not created with status: " + status2 + "");
                 System.Threading.Thread.Sleep(3000);
@@ -75,7 +75,7 @@ namespace DocWorksQA.Tests
                // DocHistory.ClickDoc_History();
                 System.Threading.Thread.Sleep(2000);
                 String str = DocHistory.GetHistoryMessage();
-                project.SuccessScreenshot("Accept Draft To Live history details loaded Successfully");
+                project.SuccessScreenshot(DocHistory.GetHistoryMessage(), "Accept Draft To Live history details loaded Successfully");
                // VerifyText(test,"Service Staging pushed Draft "+draftName+" to Live",str, "Accept Draft To Live history details loaded Successfully", "Accept Draft To Live history details are not loaded Successfully");
                 DocHistory.ClickOnNodeHistoryCloseButton();
 

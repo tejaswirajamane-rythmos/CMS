@@ -151,7 +151,10 @@
     <Compile Include="Tests\Assets\TC_21_ValidationOfUploadImage.cs" />
     <Compile Include="Tests\BeforeTestAfterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\GitHub\DeleteDistributionGitHub.cs" />
+    <Compile Include="Tests\GitHub\AddTagGroupsAtProjectLevelForGitHub.cs" />
+    <Compile Include="Tests\GitHub\ChangeNodeLocation_For_GitHub.cs" />
+    <Compile Include="Tests\GitHub\Doc_History\GitHub_1_ValidateDocHistoryForFileNameUpdate.cs" />
+    <Compile Include="Tests\GitHub\UpdateAndDeleteDistributionGitHub.cs" />
     <Compile Include="Tests\GitHub\CreateDistributionGitHub.cs" />
     <Compile Include="Tests\GitHub\CreateProjectGitHub.cs" />
     <Compile Include="Tests\GitHub\Doc_History\GitHub_1_ValidateDocHistoryBySearchingThroughUsernameandDraftnmaeInSearchField.cs" />
@@ -161,7 +164,7 @@
     <Compile Include="Tests\GitHub\Doc_History\GitHub_6_ValidateDocHistoryWithActionItems.cs" />
     <Compile Include="Tests\GitHub\Doc_History\GutHub_2_ValidateDocHistoryBySelectingDate.cs" />
     <Compile Include="Tests\GitHub\Drafts\GitHub_Draft_AcceptToLive.cs" />
-    <Compile Include="Tests\GitHub\Drafts\CreateUpdateandDeleteProjectForGitHub.cs" />
+    <Compile Include="Tests\GitHub\CreateUpdateAndDeleteProjectForGitHub.cs" />
     <Compile Include="Tests\GitHub\Drafts\GitHub_5_ValidateAddUpdateDeleteDraft.cs" />
     <Compile Include="Tests\GitHub\Drafts\GitHub_1_ValidateNewDraftDialogBoxAndErrorMsgForInvalidDrafts.cs" />
     <Compile Include="Tests\GitHub\Drafts\GitHub_2_ValidationOfCreateDraftsOfExistingAndBlankWithValidDraftNames .cs" />
@@ -170,6 +173,15 @@
     <Compile Include="Tests\GitHub\History\GitHub_5_ValidateHistoryTabAfterEditingGdoc.cs" />
     <Compile Include="Tests\GitHub\History\GitHub_6_ValidateCreateDraftSnapShot.cs" />
     <Compile Include="Tests\GitHub\History\GitHub_7_ValidateEditDraftSnapshot.cs" />
+    <Compile Include="Tests\GitLab\AddTagGroupsAtProjectLevelForGitLab.cs" />
+    <Compile Include="Tests\GitLab\CreateUpdateAndDeleteProjectForGitLab.cs" />
+    <Compile Include="Tests\GitLab\Drafts\GitLab_Draft_AcceptToLive.cs" />
+    <Compile Include="Tests\GitLab\TestFixtureAttribute.cs" />
+    <Compile Include="Tests\GitLab\UpdateAndDeleteDistributionGitLab.cs" />
+    <Compile Include="Tests\Mercurial\AddTagGroupsAtProjectLevelForMercurial.cs" />
+    <Compile Include="Tests\Mercurial\CreateUpdateAndDeleteProjectForMercurial.cs" />
+    <Compile Include="Tests\Mercurial\Drafts\Mercurial_Draft_AcceptToLive.cs" />
+    <Compile Include="Tests\Mercurial\UpdateAndDeleteDistributionMercurial.cs" />
     <Compile Include="Tests\Nodes\AddNodeWithAndWithoutDraftNameForGitHub.cs" />
     <Compile Include="Tests\GitLab\CreateDistributionGitLab.cs" />
     <Compile Include="Tests\GitHub\Drafts\CreateProjectGitLab.cs" />
@@ -203,6 +215,7 @@
     <Compile Include="Tests\Mercurial\History\Mercurial_7_ValidateEditDraftSnapshot.cs" />
     <Compile Include="Tests\Nodes\DeleteNodeForGitHub.cs" />
     <Compile Include="Tests\Nodes\RenameNodeForGitHub.cs" />
+    <Compile Include="Tests\Publishing\TC01_ValidationOfPublishing.cs" />
     <Compile Include="Tests\TagGroupCreation\TagGroupCreationSystemscreen.cs" />
     <Compile Include="Tests\Validation\CreateDistributionValidations\DistributionNameLengthValidation.cs" />
     <Compile Include="Tests\Validation\CreateDistributionValidations\VerifySystemShouldThrowAnErrorWhileCreatingDistributionIfValuesAreNotEnteredInAnyOneMandatoryFields.cs" />
@@ -254,9 +267,7 @@
     <Content Include="MediaFiles\Images\Rose.tif" />
     <Content Include="MediaFiles\Images\Rythmos.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tests\CreateProject\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>

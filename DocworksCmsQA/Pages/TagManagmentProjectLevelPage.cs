@@ -12,9 +12,9 @@ namespace DocWorksQA.Pages
     {
         public By DASHBOARD = By.XPath("//a[@href='/dashboard']");
         public By SEARCH_IN_DASHBOARD = By.XPath("//input[@type='Search']");
-        public By SETTINGS = By.XPath("//mat-card/mat-card-title/div[2]//i[1]");
-        public By CLICK_MANAGE_TAG_GROUPS = By.XPath("(//button[@class='mat-menu-item'])[2]");
-        public By SEARCH_TAGS_AT_PROJECTLEVEL = By.XPath("//input[@placeholder='Search Tag Groups']");
+        public By SETTINGS = By.XPath("(//i[@class='mdi mdi-chevron-down'])[1]");
+        public By CLICK_MANAGE_TAG_GROUPS = By.XPath("//button[@class='mat-menu-item'][contains(text(),'Manage Tag Groups')]");
+        public By SEARCH_TAGS_AT_PROJECTLEVEL = By.XPath("//input[@placeholder='Search Tag Group']");
         public By AVAILABLE_TAG_PLUS_CIRCLE = By.XPath("(//mat-expansion-panel//i[@class='mdi mdi-plus-circle mdi-18px'])[position()=1]");
         public By ASSIGNED_TAG_CLOSE_CIRCLE = By.XPath("//mat-expansion-panel//i[@class='mdi mdi-close-circle mdi-18px']");
         public By GET_TAG_NAME_AT_PROJECTLEVEL = By.XPath("//mat-chip/span");
@@ -71,6 +71,7 @@ namespace DocWorksQA.Pages
         {
             WaitForElement(AVAILABLE_TAG_PLUS_CIRCLE);
             Click(AVAILABLE_TAG_PLUS_CIRCLE);
+            EscapeActionFromKeyboard();
             Info(test,"Clicked On Plus circle of Available Tag to Move into Assigned Tags");
         }
         public void ClickCloseCircle()

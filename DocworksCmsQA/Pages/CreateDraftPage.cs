@@ -151,7 +151,7 @@ namespace DocWorksQA.Pages
             {
                     el.Click();
                     break;
-             }
+            }
 
             System.Threading.Thread.Sleep(15000);
             Info(test,"Clicked on Unity Manual Node");

@@ -30,7 +30,7 @@ namespace DocWorksQA.Pages
         public By MERCURIAL_REPO_PATH = By.XPath("//input[@placeholder='Mercurial Repo Path']");
         public By SIZE_EXCEED_100 = By.XPath("(//mat-dialog-content//div/small)[1]");
         public By SIZE_EXCEED_1000 = By.XPath("(//mat-dialog-content//div/small)[4]");
-        public By DESCRIPTION_FIELD = By.XPath("(//div[@class='mat-form-field-infix'])[7]");
+        public By DESCRIPTION_FIELD = By.XPath("//textarea[@placeholder='Description']");
         public By DESCRIPTION_FIELD1 = By.XPath("//textarea[@id='mat-input-15']");
         public By PUBLISHED_PATH = By.XPath("//input[@placeholder='Published Path']");
         public By BACK_BUTTON = By.XPath("//button[@class='mat-raised-button']/span");
@@ -50,11 +50,12 @@ namespace DocWorksQA.Pages
         public By ERROR = By.XPath("//mat-error");
         public By SETTINGS = By.XPath("//mat-card/mat-card-title/div//a");
         public By EDITPROJECTCLICK = By.XPath("//div[@class='cdk-overlay-pane']");
-
+        public By DELETEPROJECT = By.XPath("//button[@class='mat-menu-item'][text()='Delete Project']");
+        public By CONFIRM_BUTTON_FOR_DELETE_PROJECT = By.XPath("//button//span[@class='mat-button-wrapper'][text()=' Confirm ']");
         public object DriverWaitUtil { get; private set; }
 
         private ExtentTest test;
-
+        private object button;
 
         public AddProjectPage(ExtentTest test, IWebDriver driver) : base(driver)
         {
@@ -64,14 +65,27 @@ namespace DocWorksQA.Pages
         public void ClickUpdateProject()
         {
             Click(UPDATE_PROJECT_BUTTON);
-            Info("Clicked on Update Project button");
+            Info(test,"Clicked on Update Project button");
+        }
+
+      public void ClickDeleteProjectButton()
+        {
+            Click(SETTINGS_BUTTON);
+            Click(DELETEPROJECT);
+
+            WaitForElement(CONFIRM_BUTTON_FOR_DELETE_PROJECT);
+            Click(CONFIRM_BUTTON_FOR_DELETE_PROJECT);
+            Info(test,"Clicked on Confirm Button");
         }
         public void ClickProjectSettingsButton()
         {
-            Click(SETTINGS_BUTTON);
+
+            WaitForElement(PROJECT_SETTINGS);
             Click(PROJECT_SETTINGS);
-           
-            //Info("Clicked on  Project Settings inside settings button");
+           // WaitForElement(By.XPath("//div[@class='mat-menu-content'])"));
+           // MoveToelementAndClick(By.XPath("(//button//div[@class='mat-menu-ripple mat-ripple'])[1]"));
+            // MoveToelementAndClick(PROJECT_SETTINGS);
+           // Info("Clicked on  Project Settings inside settings button");
         }
 
         public Boolean IsProjectEnable()
@@ -243,11 +257,11 @@ namespace DocWorksQA.Pages
 
         public void EnterDescription(String description)
         {
-           
+
             //ElementHighlight(By.XPath("hgf"));
-            WaitForElement(DESCRIPTION_FIELD).Click();
-            
-            Clear(DESCRIPTION_FIELD1);
+            /// WaitForElement(DESCRIPTION_FIELD).Click();
+            Click(DESCRIPTION_FIELD);
+            Clear(DESCRIPTION_FIELD);
             EnterValue(DESCRIPTION_FIELD, description);
             Info(test, "Entered Description : " + description);
         }
@@ -306,31 +320,64 @@ namespace DocWorksQA.Pages
         }
 
         public void WaitForProcessCompletion() {
-            for (int i = 0; i < 1000; i++)
-            {
+         //   for (int i = 0; i < 1000; i++)
+           // {
 
                 String tmp = GetText(NOTIFICATION_MESSAGE);
 
-                if (tmp.Contains("successful") || tmp.Contains("failed"))
-                {
-                    Console.WriteLine(i + " : " + tmp);
-                    Info(test, "Total time taken for completion : " + (3000 * 1000) + " ms");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine(tmp);
-                    System.Threading.Thread.Sleep(3000);
-                }
+                //if (tmp.Contains(" Step 3/3") || tmp.Contains("project created"))
+                //{
+                //    Console.WriteLine(i + " : " + tmp);
+                //    Info(test, "Total time taken for completion : " + (3000 * 1000) + " ms");
+                //    break;
+                //}
+                //else
+                //{
+                //    Console.WriteLine(tmp);
+                //    System.Threading.Thread.Sleep(3000);
+                //}
 
-            }
+           // }
         }
 
         public String GetNotificationStatus()
         {
 
-            WaitForProcessCompletion();
-            return GetText(NOTIFICATION_MESSAGE);
+          //WaitForProcessCompletion();
+            String tmp2 = GetText(NOTIFICATION_MESSAGE);
+            if (tmp2.Contains("project created"))
+            {
+          
+                tmp2 = "project created sucessfully";
+            }
+            else if(tmp2.Contains("tag groups added to project"))
+            {
+                tmp2 = "TagGroups added successfully";
+            }
+          //  VerifyText(test, "Adding tagGroups to project" + projectName + "TagGroups added successfully", status, "Taggroup added Successfully", "Taggroup is not added successfully with status: " + status + "//");
+  
+            else if (tmp2.Contains("Node has been created"))
+            {
+                System.Threading.Thread.Sleep(4000);
+                tmp2 = "Node has been created successfully";
+            }
+            else if(tmp2.Contains("draft has been created"))
+            {
+                tmp2 = "draft has been created successfully";
+            }
+            else if(tmp2.Contains("draft has been accepted to live"))
+            {
+                tmp2 = "draft has been accepted to live";
+            }
+            else if (tmp2.Contains("asset uploaded"))
+            {
+                tmp2 = "asset uploaded successfully";
+            }
+            else if (tmp2.Contains("Node has been created"))
+            {
+                tmp2 = "Node has been created successfully";
+            }
+            return tmp2;
 
         }
 
@@ -363,9 +410,8 @@ namespace DocWorksQA.Pages
         public void BackToProject()
         {
             //System.Threading.Thread.Sleep(5000);
-            WaitForElement(BACKDROP);
-            MoveToelementAndClick(BACKDROP);
-            Info(test, "Clicked On BackDrop");
+            EscapeActionFromKeyboard();
+             Info(test, "Clicked On Escape Action From KeyBoard");
         }
 
         public void SelectContentType(String value)

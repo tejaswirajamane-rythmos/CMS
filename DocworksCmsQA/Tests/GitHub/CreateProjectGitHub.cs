@@ -37,7 +37,7 @@ namespace DocWorksQA.Tests
 
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
-                String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
+                String description = TestContext.CurrentContext.Test.Properties.Get("Description")?.ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.ClickAddProject();
@@ -46,13 +46,13 @@ namespace DocWorksQA.Tests
                 addProject.SelectContentType("Manual");
                 addProject.SelectSourceControlProviderType("GitHub");
                 addProject.SelectRepository("AssetPullTest");
-                addProject.EnterPublishedPath("Publishing path to create project");
+                addProject.EnterPublishedPath("Manual");
                 addProject.EnterDescription("This is to create Project for GitHub");
                 addProject.ClickCreateProject();
                 addProject.ClickNotifications();
-              // String status = addProject.GetNotificationStatus();
-              //  addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Project Created Title");
-              //  VerifyText(test, "creating a project " + projectName + "project created", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                String status = addProject.GetNotificationStatus();
+               addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Project Created Title");
+               VerifyText(test, "creating a project " + projectName + "project created", status, "Project Created Successfully", "Project is not created with status: " + status + "//");
                 addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot(addProject.GET_TITLE, "Project Available on Search");

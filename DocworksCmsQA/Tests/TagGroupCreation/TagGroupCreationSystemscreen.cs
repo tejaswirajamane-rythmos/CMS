@@ -47,19 +47,17 @@ namespace DocworksCmsQA.Tests.Taggroupscreation
                 createTagGroup.ClickChildNodeInheritCheckBox();
                 createTagGroup.ClickDisplayOnPublishPathCheckBox();
                 createTagGroup.ClickColorPicker();
-
-                createTagGroup.ClickCreateTagGroupAfterDone();
-
+                createTagGroup.ClickCreateTagGroupAfterDone();              
+                createTagGroup.EnterSearchTagInTagGroup(TagGroupName);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.SuccessScreenshot("TagGroup got Created Successfully");
-                createTagGroup.EnterSearchTagInTagGroup(TagGroupName);
                 System.Threading.Thread.Sleep(6000);
                 String Acutal = createTagGroup.GetTagGroupName(TagGroupName);
                 addProject.SuccessScreenshot("Created TagGroup:  " + TagGroupName + "");
                 createTagGroup.ClickEditTagGroupIcon(TagGroupName);
                 createTagGroup.ClickEditTagGroups(TagGroupName);
                 //Editing,Renaming Draft
-                newTagGroupName = "NewTagGroupNamefromselenium" + GenerateRandomNumbers(5);
+                newTagGroupName = "NewTagGroupName" + GenerateRandomNumbers(5);
                createTagGroup.EditTagGroupName(newTagGroupName);
                 System.Threading.Thread.Sleep(2000);
                 createTagGroup.ClickTagGroupUpdate();
@@ -118,7 +116,7 @@ namespace DocworksCmsQA.Tests.Taggroupscreation
                 //Edit Tag
                 createTagGroup.ClickEditTagInManageTags("TAG123");
                 System.Threading.Thread.Sleep(2000);
-                createTagGroup.ClickAcceptTagName();
+                //createTagGroup.ClickAcceptTagName();
                 createTagGroup.EnterSearchInManageTagsAfterEdit("TAG123");
                // String Acutal1 = createTagGroup.GetTextOfEditedTag("TAG123");
                 System.Threading.Thread.Sleep(2000);

@@ -28,15 +28,21 @@ namespace DocWorksQA.Pages
         public By BRANCH_OPTIONS_GITHUB = By.XPath("(//mat-option//span[contains(@class,'mat-option-text')])[text()='DocWorksManual3']");
         public By CLEAR_BUTTON = By.XPath("(//button[@class='mat-raised-button']/span)[1]");
         public By CLOSE_BUTTON = By.XPath("//button/span/i[@class='mdi mdi-close mdi-24px']");
+
+        
+
         //public By CREATE_DISTRIBUTION = By.XPath("//button//span[contains(text(),'Create Distribution')]");
         public By CREATE_DISTRIBUTION = By.XPath("//span[@class='mat-button-wrapper'][text()='Create Distribution']");
         public By AVAIL_DISTRIBUTION_NAME = By.XPath("(//mat-chip/div/strong)");
-        public By AVAIL_DISTRIBUTION_EDIT = By.XPath("//mat-chip/div/mat-icon/i");
+        public By AVAIL_DISTRIBUTION_EDIT = By.XPath("//mat-chip/div/mat-icon/i[@class='mdi mdi-pencil mdi-18px cursor-pointer']");
         //public By AVAIL_DISTRIBUTION_CREATED_DT = By.XPath("//mat-chip/small/strong");
         public By INVALID_TITLE_LENGTH = By.XPath("//mat-error[@class='mat-error ng-star-inserted']");
            public By TOC_PATH = By.XPath("//input[@placeholder='TOC Path']");
         public By ERROR = By.XPath("//mat-error[@role='alert']");
         public By DELETE_DISTRIBUTION = By.XPath("//i[@class='mdi mdi-delete mdi-18px cursor-pointer']");
+        public By CONFIRM_BUTTON_FORDELETE_DIST = By.XPath("//span[@class='mat-button-wrapper'][text()=' Confirm ']");
+        public By UPDATE_DISTRIBUTION_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][text()='Update Distribution']");
+
 
 
         private ExtentTest test;
@@ -47,6 +53,11 @@ namespace DocWorksQA.Pages
         public CreateDistributionPage(ExtentTest test, IWebDriver driver) : base(driver)
         {
             this.test = test;
+        }
+        public void ClickUpdateDistribution()
+        {
+            Click(UPDATE_DISTRIBUTION_BUTTON);
+            Info(test, "Clicked on Update Distribution Button");
         }
 
         /**
@@ -103,6 +114,7 @@ namespace DocWorksQA.Pages
         */
         public String EnterDistirbutionName()
         {
+            
             String DistName = "SELENIUMDIST"+ GenerateRandomString(5);
             EnterValue(DISTRIBUTION_NAME, DistName);
             Info(test, "Distribution Name is" + DistName);
@@ -190,6 +202,9 @@ namespace DocWorksQA.Pages
         {
             Click(DELETE_DISTRIBUTION);
             Info(test, "Clicked on Delete Distribution Button");
+            WaitForElement(CONFIRM_BUTTON_FORDELETE_DIST);
+            Click(CONFIRM_BUTTON_FORDELETE_DIST);
+            Info(test, "Clicked on Confirm  Button for Deleting Distribution");
         }
 
         public void SelectBranch(String value)
@@ -332,8 +347,14 @@ namespace DocWorksQA.Pages
             Info("Error message is" +str);
             return str;
         }
+        public void ClickEditDistButton()
+        {
+            Click(AVAIL_DISTRIBUTION_EDIT);
+            Info( test,"Clicked on Edit Button");
+           
+        }
 
-        
-       
+
+
     }
 }

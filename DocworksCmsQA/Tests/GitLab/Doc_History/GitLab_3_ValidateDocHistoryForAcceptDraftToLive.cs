@@ -20,7 +20,7 @@ namespace DocWorksQA.Tests
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-            projectName = "SELENIUMGITLABHGGBW";
+            projectName = "othersfuntionalitytest";
 
             // projectName = new CreateProjectsApi().CreateGitLabProject();
             //  distributionName = new CreateDistributionsApi().CreateGitLabDistribution(projectName)["distributionName"];
@@ -38,11 +38,8 @@ namespace DocWorksQA.Tests
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
                 Console.WriteLine("Starting Test Case : " + TestName);
-                // distributionName = new CreateDistributionsApi().CreateGitLabDistribution(projectName)["DistributionName"];
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description); 
-                
-
                 AddProjectPage project = new AddProjectPage(test, driver);
                 //project.ClickDashboard();
                 project.SearchForProject(projectName);
@@ -53,11 +50,11 @@ namespace DocWorksQA.Tests
                 String draftName = createDraft.EnterValidDraftName();
                 createDraft.SelectCoderDraft();
                 createDraft.CreateDraft();
-               // project.ClickNotifications();
-               // String status2 = project.GetNotificationStatus();
+                 project.ClickNotifications();
+                String status2 = project.GetNotificationStatus();
                 project.SuccessScreenshot("Existing Draft got Created Successfully");
                 //project.SuccessScreenshot("Blank Draft got Created Successfully");
-              //  VerifyText(test, "creating a draft " + draftName + " in UnityManual is successful", status2, "Draft: " + draftName + " is Created with status:" + status2 + "", "Draft is not created with status: " + status2 + "");
+                 VerifyText(test, "creating a draft " + draftName + " in UnityManual is successful", status2, "Draft: " + draftName + " is Created with status:" + status2 + "", "Draft is not created with status: " + status2 + "");
                // project.BackToProject();
                 AuthoringScreenEnhancements auth = new AuthoringScreenEnhancements(test, driver);
                 auth.LeftDraftDropDown(draftName);

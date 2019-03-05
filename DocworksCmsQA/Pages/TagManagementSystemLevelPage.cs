@@ -18,14 +18,11 @@ namespace DocWorksQA.Pages
         public By DISPLAYONPUBLISHEDPATH_CHECKBOX = By.XPath("(//div[@class='mat-checkbox-inner-container'])[4]");
         public By INCLUDEINPUBLISHEDMETA_CHECKBOX = By.XPath("(//div[@class='mat-checkbox-inner-container'])[5]");
         public By USERTAGGROUP_CHECKBOX = By.XPath("(//div[@class='mat-checkbox-inner-container'])[6]");
-
-
-
         public By DISPLAY_GROUP_NAME_CHECKBOX = By.XPath("//span[@class='mat-checkbox-label'][contains(text(),'Display group name')]");
         public By COLOR_PICKER = By.XPath("//div[@class='ui-colorpicker-color']");
         //public By CSSVALUE = By.CssSelector(COLOR_PICKER);
         public By CREATE_TAGGROUP = By.XPath("//span[@class='mat-button-wrapper'][text()=' CREATE ']");
-        public By GET_GROUP_NAME = By.XPath("(//mat-list-item//div/span/span)[text()='TAGGGROUPXYZ']");
+        public By GET_TAGGROUP_NAME = By.XPath("/html/body/app-root/app-main/mat-sidenav-container/mat-sidenav-content/div/div/app-system/div/app-tag-group-dashboard/div/mat-list/div[2]/div[1]/div/mat-list-item/div");
         public By EDIT_TAGGROUP_ICON = By.XPath("//i[@class='mdi mdi-dots-vertical mdi-24px cursor-pointer']");
         public By EDIT_TAG_GROUP = By.XPath("//button[@class='mat-menu-item'][contains(text(),'Edit Tag Group')]");
         public By MANAGE_TAG_GROUP = By.XPath("(//button[@class='mat-menu-item'])[text()='Manage Tags']");
@@ -46,13 +43,14 @@ namespace DocWorksQA.Pages
         public By UPDATE_TAGGROUP = By.XPath("//button/span[contains(text(),'UPDATE')]");
         public By CLOSE_EDIT_TAGS = By.XPath("//button[@class='mat-button']//i[@class='mdi mdi-close mdi-24px']");
         public By GET_TAG_NAME = By.XPath("(//mat-dialog-container//mat-dialog-content//mat-list-item//div[@class='ng-star-inserted'])[last()]");
-        public By SEARCH_TAGGROUP_COLLECTION = By.XPath("(//input[@placeholder='Type to Search'])[1]");
+        public By SEARCH_TAGGROUP_COLLECTION = By.XPath("//input[@ngclass='form-control']");
         public By SEARCH_IN_MANAGETAGS = By.XPath("//input[@placeholder='Search Tags']");
         public By GET_SIZE_OF_NO_OF_TAGS = By.XPath("//mat-dialog-container//mat-list-item[@class='mat-list-item ng-star-inserted']/div");
         public By ENTER_EDIT_TAG = By.XPath("(//input[@class='form-control ng-pristine ng-valid ng-touched'])[2]");
         public By ENTER_TAG_NAME_1 = By.XPath("(//div[@class='custom-mat-input-wrapper']/input)[2]");
         //public By ENTER_TAG_NAME_2 = By.XPath("//div/input[@name='tagName']");
         public By BACK_DROP = By.XPath("//div[@class='cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing']");
+       // public By AUTHORING_TAB = By.XPath("//a[@class='mat-tab-link desktop-nav ng-star-inserted'][1]");
         public By DELETE_TAG_GROUP_CONFIRM_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][contains(text(),'Confirm')]");
         private readonly ExtentTest test;
 
@@ -129,23 +127,23 @@ namespace DocWorksQA.Pages
         public void ClickEditTagInManageTags(string newTagName)
         {
             Click(PENCIL_BUTTON);
-            Info(test, "Clicked on EditTagIcon");
+           // Info(test, "Clicked on EditTagIcon");
             System.Threading.Thread.Sleep(5000);
           //  MoveToelementAndClick(ENTER_TAG_NAME_1);
            // Info(test, "Clicked");
             //System.Threading.Thread.Sleep(7000);
-            ClickByJavaScriptExecutor(ENTER_TAG_NAME_1);
-            Info(test, "Clicked on Textbox of Edit Tag");
+            //ClickByJavaScriptExecutor(ENTER_TAG_NAME_1);
+           // Info(test, "Clicked on Textbox of Edit Tag");
             //ClearByJavaScriptExecutor(ENTER_TAG_NAME_1);
             //Info(test, "Cleared");
             //System.Threading.Thread.Sleep(7000);
             SendKeysByJavaScriptExecutor(ENTER_TAG_NAME_1, newTagName);
-            Info(test, "Edited tag  Name  is " + newTagName);
+           // Info(test, "Edited tag  Name  is " + newTagName);
             System.Threading.Thread.Sleep(7000);
             ClickByJavaScriptExecutor(CHECK_THE_TAGNAME);
             //ClickByJavaScriptExecutor(CHECK_THE_TAGNAME);
             System.Threading.Thread.Sleep(7000);
-            Info(test, "Clicked on Check Mark Icon");
+          //  Info(test, "Clicked on Check Mark Icon");
             ////EnterSearchInManageTags("TAG123");
         }
 
@@ -159,9 +157,8 @@ namespace DocWorksQA.Pages
 
         public void ClickBackToManageTags()
         {
-
-            Click(MANAGETAGS_BACKDROP);
-            Info(test, "Clicked on BackDrop");
+            EscapeActionFromKeyboard();
+            Info(test, "Clicked On Escape Action From KeyBoard");
         }
 
         public void SuccessScreenshot(String path, String message)
@@ -389,6 +386,7 @@ namespace DocWorksQA.Pages
     
         public void ClickEditTagGroupIcon(String TagGroupName)
         {
+            WaitForElement(EDIT_TAGGROUP_ICON);
             Click(EDIT_TAGGROUP_ICON);
             Info(test, "Clicked on edit tag group icon");
         }

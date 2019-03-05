@@ -5,16 +5,12 @@ using DocWorksQA.Tests;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DocworksCmsQA.Tests.GitHub.Drafts
+namespace DocworksCmsQA.Tests.GitLab
 {
-    [TestFixture, Category("Create Draft")]
+    [TestFixture, Category("GitLab")]
     [Parallelizable]
-    class CreateUpdateandDeleteProjectForGitHub : BeforeTestAfterTest
+    class CreateUpdateAndDeleteProjectForGitLab : BeforeTestAfterTest
     {
         private IWebDriver driver;
         private ExtentTest test;
@@ -27,9 +23,8 @@ namespace DocworksCmsQA.Tests.GitHub.Drafts
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
         }
-
-        [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
-        public void TC01_ValidateCreateProjectForGitHubWithAllFields()
+        [Test, Description("Verifying user is able to Create,Update and Delete Project")]
+        public void TC01_ValidateCreateUpdateDeleteProjectForGitLabWithAllFields()
         {
             try
             {
@@ -42,26 +37,32 @@ namespace DocworksCmsQA.Tests.GitHub.Drafts
                 projectName = "SELENIUMGITLAB" + GenerateRandomString(5); ;
                 addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
+                // addProject.selectimage();
                 addProject.SelectSourceControlProviderType("GitLab");
                 addProject.SelectRepository("AssetPullTest");
                 addProject.EnterPublishedPath("Manual");
                 addProject.EnterDescription("This is to create Project for gitlab");
                 addProject.ClickCreateProject();
+                //addProject.ClickNotifications();
+                // String status = addProject.GetNotificationStatus();
+                // addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Project Created Successfully");
+                // VerifyText(test, "creating a project "+projectName+ " is successful", status, "Project Created Successfully", "Project is not created with status: " + status + "");
+                addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot(addProject.GET_TITLE, "Project Available on Search");
-                // VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
-                // return projectName;
-
+                VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+                Console.WriteLine("Project Name is  " + projectName);
                 //Updating project
-               
-
                 addProject.ClickProjectSettingsButton();
-              
                 addProject.EnterDescription("This is to update Project Description for GitHub");
                 addProject.ClickUpdateProject();
                 System.Threading.Thread.Sleep(2000);
                 Console.WriteLine("Project Description has been updated");
+                System.Threading.Thread.Sleep(2000);
+                //Deleting project
+                addProject.ClickDeleteProjectButton();
+                Console.WriteLine("Project Deleted successfully");
             }
             catch (Exception e)
             {
@@ -70,30 +71,13 @@ namespace DocworksCmsQA.Tests.GitHub.Drafts
                 throw;
             }
 
-
         }
-        //[Test, Description("Verifying User is able to Update Project For GitLab  with all Fields")]
-        //public void TC01_ValidateUpdateProjectForGitHubWithAllFields()
-        //{
-        //    try
-        //    {
-        //        AddProjectPage addProject = new AddProjectPage(test, driver);
-        //        addProject.SearchForProject(projectName);
-        //        addProject.ClickProjectSettings();
-        //        addProject.EnterDescription("This is to update Project for GitHub");
-        //        addProject.ClickUpdateProject();
+        public void CloseBrowser()
+        {
+            Console.WriteLine("Quiting Browser");
 
+            CloseDriver(driver);
+        }
 
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ReportExceptionScreenshot(test, driver, e);
-        //        Fail(test, e);
-        //        throw;
-        //    }
-
-        //}
     }
 }
-
-

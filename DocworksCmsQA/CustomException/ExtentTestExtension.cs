@@ -10,6 +10,7 @@ namespace DocworksCmsQA.CustomException
         
         public static ExtentTest CustomeFail(this ExtentTest extentTest, Exception ex)
         {
+           
             return extentTest.CustomeLog(Status.Fail, ex);
         }
 

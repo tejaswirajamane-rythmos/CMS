@@ -1,33 +1,35 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using DocWorksQA.SeleniumHelpers;
-using System;
+﻿using AventStack.ExtentReports;
 using DocWorksQA.Pages;
-using System.Diagnostics;
-using AventStack.ExtentReports;
+using DocWorksQA.SeleniumHelpers;
+using DocWorksQA.Tests;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
-using DocworksCmsQA.DatabaseScripts;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DocWorksQA.Tests
+namespace DocworksCmsQA.Tests.GitHub.Drafts
 {
-    [TestFixture, Category("Create Project")]
+    [TestFixture, Category("Create Draft")]
     [Parallelizable]
-    class CreateProjectGitLab : BeforeTestAfterTest
+    class CreateUpdateandDeleteProjectForGitHub : BeforeTestAfterTest
     {
         private IWebDriver driver;
         private ExtentTest test;
         String projectName;
 
 
-       [OneTimeSetUp]
-        public void AddPProjectModule() {
+        [OneTimeSetUp]
+        public void AddPProjectModule()
+        {
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
         }
 
-       
-       [Test, Description("Verifying User is able to Add Project For GitLab  with all Fields")]
-        public void TC02_ValidateCreateProjectForGitLabWithAllFields()
+        [Test, Description("Verifying user is able to Create,Update and Delete Project")]
+        public void  TC01_ValidateCreateUpdateDeleteProjectForGitHubWithAllFields()
         {
             try
             {
@@ -36,33 +38,36 @@ namespace DocWorksQA.Tests
                 String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
-
-
-
                 addProject.ClickAddProject();
-
-
-
-                projectName = "SELENIUMGITLAB"+GenerateRandomString(5);;
+                projectName = "SELENIUMGITLAB" + GenerateRandomString(5); ;
                 addProject.EnterProjectTitle(projectName);
                 addProject.SelectContentType("Manual");
-               // addProject.selectimage();
                 addProject.SelectSourceControlProviderType("GitLab");
                 addProject.SelectRepository("AssetPullTest");
                 addProject.EnterPublishedPath("Manual");
                 addProject.EnterDescription("This is to create Project for gitlab");
-
                 addProject.ClickCreateProject();
-                addProject.ClickNotifications();
-                String status = addProject.GetNotificationStatus();
-                addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Project Created Successfully");
-                VerifyText(test, "creating a project " + projectName + "project created", status, "Project Created Successfully", "Project is not created with status: " + status + "//");
-                addProject.ClickDashboard();
                 addProject.SearchForProject(projectName);
                 String actual = addProject.GetProjectTitle();
                 addProject.SuccessScreenshot(addProject.GET_TITLE, "Project Available on Search");
-                VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
-        }
+                // VerifyEquals(test, projectName, actual, "Created Project Found on Dashboard.", "Created Project Not Available on Dashboard.");
+              
+                Console.WriteLine("Project Name is  " +projectName);
+
+                //Updating project
+                TagManagementProjectLevelPage ProjectLevel = new TagManagementProjectLevelPage(test, driver);
+                ProjectLevel.ClickSettings();
+                addProject.ClickProjectSettingsButton();
+              
+                addProject.EnterDescription("This is to update Project Description for GitHub");
+                addProject.ClickUpdateProject();
+                System.Threading.Thread.Sleep(2000);
+                Console.WriteLine("Project Description has been updated");
+                System.Threading.Thread.Sleep(2000);
+                //Deleting Project
+                addProject.ClickDeleteProjectButton();
+                Console.WriteLine("Project Deleted successfully");
+            }
             catch (Exception e)
             {
                 ReportExceptionScreenshot(test, driver, e);
@@ -70,19 +75,16 @@ namespace DocWorksQA.Tests
                 throw;
             }
 
-        }
 
-       
-      
-        [OneTimeTearDown]
+        }
         public void CloseBrowser()
         {
             Console.WriteLine("Quiting Browser");
+
             CloseDriver(driver);
-            db.FindProjectAndDelete(projectName);
-         }
+        }
 
-       
     }
-
 }
+
+

@@ -48,6 +48,9 @@ namespace DocWorksQA.Pages
         public By DELETEDRAFT_BUTTON = By.XPath("//span[@class='mat-button-wrapper'][text()='Delete']");
         public By RENAME_RIGHT_MARK = By.XPath("(//div[@class='mat-menu-ripple mat-ripple'])[1]");
         public By LIST_OF_DRAFTS = By.XPath("//div[@class='tag-editing']/div/span");
+        public By FILENAME_EDIT_BUTTON = By.XPath("(//i[@class='mat-suffix mdi mdi-pencil mdi-24px cursor-pointer ng-star-inserted'])[3]");
+        public By FILENAME_TEXT_BOX = By.XPath("//input[@class='form-control ng-pristine ng-valid ng-touched']");
+        public By ACCEPT_BUTTON_FOR_FILERENAME = By.XPath("//i[@class='mat-suffix mdi mdi-check mdi-24px cursor-pointer ng-star-inserted']");
         private ExtentTest test;
         public Doc_HistoryPage(ExtentTest test, IWebDriver driver) : base(driver)
         {
@@ -56,6 +59,7 @@ namespace DocWorksQA.Pages
 
         public void ClickDoc_History()
         {
+            EscapeActionFromKeyboard();
             WaitForElement(DOC_HISTORY_BUTTON);
             Click(DOC_HISTORY_BUTTON);
             Info(test, "Clicked on DocHistory Button.");
@@ -63,18 +67,37 @@ namespace DocWorksQA.Pages
         public void Settings_Button()
         {
             WaitForElement(SETTINGS_BUTTON);
-   
+          
             Click(SETTINGS_BUTTON);
             Info(test, "Clicked on Settings Button.");
         }
 
-       
+        public void UpdateFileName(String NewFileName)
+        {
+            Click(FILENAME_TEXT_BOX);
+            Clear(FILENAME_TEXT_BOX);
+            EnterValue(FILENAME_TEXT_BOX, NewFileName);
+            Info(test, "Updated file name");
+
+            
+
+        }
+        public void ClickOnTickMarkToRenameFileName()
+        {
+            Click(ACCEPT_BUTTON_FOR_FILERENAME);
+            Info(test, "Clciked on Accept Button  for File Rename");
+        }
 
         public String GetHistoryMessage()
         {
             Info(test, GetText(HISTORY_TEXT));
             return GetText(HISTORY_TEXT);
 
+        }
+        public void ClickEditFileButton()
+        {
+            Click(FILENAME_EDIT_BUTTON);
+            Info(test, "Clicked on Edit Button");
         }
 
 

@@ -17,53 +17,44 @@ namespace DocWorksQA.Tests
     public class AddNode : BeforeTestAfterTest
     {
         private static IWebDriver driver;
-        private ExtentTest test;
+        private ExtentTest test; 
         string projectName;
         string distribution;
-        string projectParameter;
 
-        //  [Xunit.Theory]
         [OneTimeSetUp]
 
-        // [NUnit.Framework.Theory]
-
-        // [InlineData("3", "error : MercurialRepositoryUrl is required field", "Mercurial", "C854")]
-        // [InlineData("SELENIUMGITHUBPKAEO")]
-        // [InlineData("SELENIUMGITLABVHRIO")]
-        // [InlineData("SELENIUMOnoAJXYL")]
-
-        public void AddPProjectModule(String projectParameter)
+        public void AddPProjectModule()
         {
-            // projectName = projectParameter;
-            //   projectName = "SELENIUMGITLABVHRIO ";
-            // projectName = "SELENIUMOnoITBPH";
-            if (projectName == "null")
-            {
-                CreateProjectGitHub CPG = new CreateProjectGitHub();
-                CPG.TC03_ValidateCreateProjectForGitHubWithAllFields();
-                 
-
-            }
-            else
-            {
-
-                projectName = db.GetOneProjectForManual_GitHub();
-
-                distribution = db.GetOneDistributionFromProject(projectName);
-            }
+                  projectName = "publishtest04";
+                //   projectName = "SELENIUMGITLABVHRIO ";
+                // projectName = "SELENIUMOnoITBPH";
                 driver = new DriverFactory().Create();
-                new LoginPage(driver).Login();
-                //System.Threading.Thread.Sleep(5000);
-            
-        }
+            new LoginPage(driver).Login();
+           // projectName = db.GetOneProjectForManual_GitHub();
+            //if (projectName == null)
 
+            //{
+            //    CreateProjectGitHub cpg = new CreateProjectGitHub();
+            //    cpg.TC03_ValidateCreateProjectForGitHubWithAllFields();
+
+
+            //}
+            //else
+            //{
+            //    TC1_VerifyUserAbleToAddNodeForGitHubWithDraft();
+            //}
+
+
+
+
+        }
         [Test, Description("Verify User is able to Add Node Under Tree")]
         public void TC1_VerifyUserAbleToAddNodeForGitHubWithDraft()
         {
             try
             {
                 String TestName = (TestContext.CurrentContext.Test.Name.ToString());
-                String description = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
+                String description = TestContext.CurrentContext.Test.Properties.Get("Description")?.ToString();
                 test = StartTest(TestName, description);
                 AddProjectPage addProject = new AddProjectPage(test, driver);
                 addProject.SearchForProject(projectName);
@@ -76,15 +67,19 @@ namespace DocWorksQA.Tests
                 String NodeSubTitle = node.EnterNodeSubTitle();
                 String DraftName = node.EnterDraftName();
                 node.ClickCreateNode();
-                // addProject.ClickNotifications();
-                // String status2 = addProject.GetNotificationStatus();
-                // VerifyText(test, "adding a node " + NodeTitle + " is successful", status2, "Node: " + NodeTitle + " is Created with status:" + status2 + "", "Node is not created with status: " + status2 + "");
-                // addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Node: " + NodeTitle + " Created Successfully");
-               
-              //  node.ClickUnityManualTree();
+                PageControl page = new PageControl(test, driver);
+                 page. EscapeActionFromKeyboard();
+                addProject.ClickNotifications();
+                String status2 = addProject.GetNotificationStatus();
+                page.EscapeActionFromKeyboard();
+               // VerifyText(test, "Adding tagGroups to project" + projectName + "TagGroups added successfully", status, "Taggroup added Successfully", "Taggroup is not added successfully with status: " + status + "//");
+                VerifyText(test, "Adding Nodes for project" + NodeSubTitle + "Node has been created successfully", status2, "Node has been created successfully", "Node has not been created successfully with status: " + status2 + "//");
+                addProject.SuccessScreenshot(addProject.NOTIFICATION_MESSAGE, "Node: " + NodeTitle + " Created Successfully");
+                page.EscapeActionFromKeyboard();
+               // node.ClickUnityManualTree();
                 String Actual = node.GetTextOfNode(NodeSubTitle);
                 addProject.SuccessScreenshot("Created NodeSubTitle:  " + NodeSubTitle + "");
-                // VerifyEquals(test,NodeSubTitle, Actual, "Validation of the Node Created Under Tree is successful","Validation of Node creation is unsuccessful");
+                VerifyEquals(test,NodeSubTitle, Actual, "Validation of Node has been added succsssfully", "Validation of Node hasnot  been added succsssfully");
                 node.ClickDashboard();
             }
             catch (Exception e)
@@ -135,11 +130,11 @@ namespace DocWorksQA.Tests
             }
         }
 
-        [OneTimeTearDown]
-        public void CloseBrowser()
-        {
-            Console.WriteLine("Quiting Browser");
-            CloseDriver(driver);
-        }
+       //// [OneTimeTearDown]
+       // //public void CloseBrowser()
+       // {
+       //     Console.WriteLine("Quiting Browser");
+       //     CloseDriver(driver);
+       // }
     }
 }

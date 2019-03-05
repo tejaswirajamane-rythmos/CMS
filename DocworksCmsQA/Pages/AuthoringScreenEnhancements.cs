@@ -133,14 +133,24 @@ namespace DocWorksQA.Pages
 
         public void LeftDraftDropDown(String str)
         {
-            //System.Threading.Thread.Sleep(7000);
-            System.Threading.Thread.Sleep(20000);
-            Click(LEFT_DRAFTDROPDOWN);
+            System.Threading.Thread.Sleep(7000);
+             Click(LEFT_DRAFTDROPDOWN);
             String s = "//div[@class='mat-list-item-content']//div[@fxlayout='row']//span[text()='" + str + "']";
-            // WaitForElement(By.XPath(s));
-            ScrollToElementAndClick(By.XPath(s));
+            ClickByJavaScriptExecutor(By.XPath(s));
+            System.Threading.Thread.Sleep(5000);
             Info(test,"selected Draft:  "+str+"  in left Drop Down");
         }
+
+        public void RightDraftDropDown(String str)
+        {
+            System.Threading.Thread.Sleep(7000);
+            Click(RIGHT_DRAFTDROPDOWN);
+            String s = "//div[@class='mat-list-item-content']//div[@fxlayout='row']//span[text()='" + str + "']";
+            ClickByJavaScriptExecutor(By.XPath(s));
+            System.Threading.Thread.Sleep(5000);
+            Info(test, "selected Draft:  " + str + "  in Right Drop Down");
+        }
+
 
         public void LeftLiveDraft()
         {
@@ -174,16 +184,6 @@ namespace DocWorksQA.Pages
             Info(test,"Click on left Gdoc");
             
 
-        }
-
-        public void RightDraftDropDown(String str)
-        {
-            System.Threading.Thread.Sleep(7000);
-            Click(RIGHT_DRAFTDROPDOWN);
-            String s = "//div[@class='mat-list-item-content']//div[@fxlayout='row']//span[text()='" + str + "']";
-            ClickByJavaScriptExecutor(By.XPath(s));
-            System.Threading.Thread.Sleep(5000);
-            Info(test,"selected Draft:  " + str + "  in Right Drop Down");
         }
 
         public void RightLiveDraft()
@@ -481,7 +481,7 @@ namespace DocWorksQA.Pages
         }
         public String UploadImage()
         {
-            Click(By.XPath("//div[@class='mat-tab-label mat-ripple ng-star-inserted'][text()='Uploaded By Me']"));
+            Click(By.XPath("//div[@class='mat-tab-label-content'][text()='Uploaded By Me']"));
                 String Image_Path = GetImagePath();
                 Console.WriteLine("********" + Image_Path);
                 EnterValue(UPLOAD_BUTTON, Image_Path);

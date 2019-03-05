@@ -26,7 +26,7 @@ namespace DocWorksQA.Tests
             System.Threading.Thread.Sleep(5000);
         }
 
-         //[Test, Description("Verify User is able to Upload an Image in Media Screen")]
+        [Test, Description("Verify User is able to Upload an Image in Media Screen")]
         public void TC21_ValidationOfUploadImage()
         {
             try
@@ -40,9 +40,11 @@ namespace DocWorksQA.Tests
                 String ImageName = auth.UploadImage();
                 AddProjectPage project = new AddProjectPage(test,driver);
                 project.ClickNotifications();
-                String status2 = project.GetNotificationStatus();
+                String status = project.GetNotificationStatus();
                 project.SuccessScreenshot("Image Got Uploaded Successfully");
-                VerifyText(test, "upsert asset " + ImageName + " is successful", status2, "Image: " + ImageName + " is Uploaded with status:" + status2 + "", "Image is not Uploaded with status: " + status2 + "");
+                VerifyText(test, "asset uploaded successffully" + ImageName + " asset uploaded", status, "Image: " + ImageName + " asset uploaded:", "Image is not Uploaded with status: " + status + "//");
+               // VerifyText(test, "Adding tagGroups to project" + projectName + "TagGroups added successfully", status, "Taggroup added Successfully", "Taggroup is not added successfully with status: " + status + "//");
+
                 project.BackToProject();
             }
             catch (Exception e)

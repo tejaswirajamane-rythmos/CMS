@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -11,6 +12,7 @@ namespace DocWorksQA.SeleniumHelpers
     public class PageControl : Utilities.CommonMethods
     {
        IWebDriver driver;
+        private IWebElement elementToHover;
 
         public IWebElement R1 { get; private set; }
 
@@ -18,6 +20,11 @@ namespace DocWorksQA.SeleniumHelpers
         {
             this.driver = driver;
 
+        }
+
+        public PageControl(ExtentTest test, IWebDriver driver)
+        {
+            this.driver = driver;
         }
 
         public IWebDriver GetDriver()
@@ -57,9 +64,6 @@ namespace DocWorksQA.SeleniumHelpers
             }
         }
 
-
-        
-
         public void EnterValue(By by, string value)
         {
             Console.WriteLine("DRIVER ID : " + driver.GetHashCode() + ", " + "Entering value into " + by.ToString());
@@ -76,7 +80,6 @@ namespace DocWorksQA.SeleniumHelpers
 
 
         }
-
         public void Clear(By by)
         {
             try
@@ -264,7 +267,12 @@ namespace DocWorksQA.SeleniumHelpers
              executor.ExecuteScript("arguments[0].click();", ele);
            
         }
-        
+        public bool IsElementVisible(IWebElement element)
+        {
+            return element.Displayed && element.Enabled;
+        }
+
+
 
         public void ClearByJavaScriptExecutor(By by)
         {
@@ -294,6 +302,48 @@ namespace DocWorksQA.SeleniumHelpers
             Actions act = new Actions(driver);
             act.MoveToElement(ele);
             act.Perform();
+        }
+
+        public void ClickByActions(By by)
+        {
+            IWebElement ele = WaitForElement(by);
+            Actions act = new Actions(driver);
+            act.MoveToElement(ele).Click().Perform();
+        }
+
+        public void dragAndDrop(By source, By target)
+        {
+            IWebElement ele = WaitForElement(source);
+            IWebElement ele2 = WaitForElement(target);
+            //By sou = (By)source;
+            //By tar = (By)target;
+            WaitForElement(source);
+            WaitForElement(target);
+            //IWebElement qwe = (IWebElement)source;
+            //IWebElement qwe1 = (IWebElement)source;
+            Actions action = new Actions(driver);
+            action.DragAndDrop(ele, ele2);
+
+        }
+        public void MoveAndDrop(By source,By target)
+        {
+
+            IWebElement ele = WaitForElement(source);
+            IWebElement ele2 = WaitForElement(target);
+            Actions action = new Actions(driver);
+            //action.ClickAndHold(ele).MoveToElement(ele2);
+            // System.Threading.Thread.Sleep(3000);
+            //action.Click(ele2).Release().Build().Perform();
+            IAction dragdrop = action.ClickAndHold(ele).MoveToElement(ele2).Release(ele2).Build();
+            dragdrop.Perform();
+
+        }
+
+
+        public void EscapeActionFromKeyboard()
+        {
+            Actions action = new Actions(driver);
+            action.SendKeys(Keys.Escape).Build().Perform();
         }
 
 

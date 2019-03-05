@@ -14,7 +14,7 @@ namespace DocworksCmsQA.Tests.GitHub.Drafts
 {
     [TestFixture, Category("Create Project")]
     [Parallelizable]
-    class GitHub_Draft_AcceptToLive :BeforeTestAfterTest
+    class Mercurial_Draft_AcceptToLive : BeforeTestAfterTest
 
     {
         private IWebDriver driver;
@@ -25,15 +25,14 @@ namespace DocworksCmsQA.Tests.GitHub.Drafts
         [OneTimeSetUp]
         public void AddPProjectModule()
         {
-           /// projectName = db.GetOneProjectForManual_Mercurial();
-
+             projectName = db.GetOneProjectForManual_Mercurial();
             driver = new DriverFactory().Create();
             new LoginPage(driver).Login();
             projectName = "seleniumtest";
 
         }
         [Test, Description("Verifying User is able to do Draft Accept To Live")]
-        public void TC_GitHubAcceptToLive()
+        public void TC1_MercurialAcceptToLive()
         {
             try
             {
@@ -68,8 +67,8 @@ namespace DocworksCmsQA.Tests.GitHub.Drafts
                 auth.ClickAcceptDraftToLive();
                 project.ClickNotifications();
                 String status2 = project.GetNotificationStatus();
-                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE,"Accept Draft To live of Draft got Created Successfully");
-                VerifyText(test, "draft has been accepted to live" + draftName + "draft has been accepted to live" , status2, "draft has been accepted to live with name:" + draftName + "", "Draft is not been Accepted to live with status: " + status2 + "//");
+                project.SuccessScreenshot(project.NOTIFICATION_MESSAGE, "Accept Draft To live of Draft got Created Successfully");
+                VerifyText(test, "draft has been accepted to live" + draftName + "draft has been accepted to live", status2, "draft has been accepted to live with name:" + draftName + "", "Draft is not been Accepted to live with status: " + status2 + "//");
             }
             catch (Exception e)
             {
@@ -79,7 +78,7 @@ namespace DocworksCmsQA.Tests.GitHub.Drafts
             }
         }
 
-       // [OneTimeTearDown]
+        [OneTimeTearDown]
         public void CloseBrowser()
         {
             Console.WriteLine("Quiting Browser");

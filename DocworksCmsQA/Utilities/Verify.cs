@@ -1,12 +1,14 @@
 ﻿using AventStack.ExtentReports;
 using DocworksCmsQA.CustomException;
+using OpenQA.Selenium;
 using System;
 
 namespace DocWorksQA.Utilities
 {
     public class Verify : ExtentReporter
     {
-       
+        public By VERIFY_GREEN_BUTTON = By.XPath("(//i[@class='mdi mdi-check-circle mdi-36px success-color'])[1]");
+
         /**
 	 * @author Pravin Lokeshwar
 	 * 
@@ -234,22 +236,37 @@ namespace DocWorksQA.Utilities
             }
            
         }
-
+        //public bool IsElementVisible(By by)
+        //{
+        //    IWebElement element = (IWebElement)by;
+        //    return element.Displayed && element.Enabled;
+        //}
         public void VerifyText(ExtentTest test, String expected, String actual, String successMessage, String errorMessage)
         {
+            //if(IsElementVisible(VERIFY_GREEN_BUTTON))
+            //{
+            //    Pass(test, "<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
+            //                        + successMessage);
 
-            if (expected.Equals(actual))
+            //}
+            //else
+            //{
+            //    throw new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage);
+
+            //}
+
+            if (expected.Contains(actual))
             {
                 Pass(test, "<b>Expected</b> : " + expected + "<br> <b>Actual</b> : " + actual + "<br> SUCCESS : "
                         + successMessage);
-                
+
             }
             else
             {
                 throw new AssertException("Expected : " + expected + "   Actual : " + actual + ",  ERROR : " + errorMessage);
 
             }
-  //         
+                 
         }
 
         /**
